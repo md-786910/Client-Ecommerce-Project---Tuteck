@@ -1,12 +1,12 @@
 import React from "react";
 
-function CheckoutPage() {
+function Checkout() {
   return (
     <>
       <main class="main">
         <div
           class="page-header text-center"
-          style="background-image: url('assets/images/page-header-bg.jpg')"
+          style={{ backgroundImage: "url('assets/images/page-header-bg.jpg')" }}
         >
           <div class="container">
             <h1 class="page-title">
@@ -20,9 +20,7 @@ function CheckoutPage() {
               <li class="breadcrumb-item">
                 <a href="index.html">Home</a>
               </li>
-              <li class="breadcrumb-item">
-                <a href="#">Shop</a>
-              </li>
+
               <li class="breadcrumb-item active" aria-current="page">
                 Checkout
               </li>
@@ -362,4 +360,4 @@ function CheckoutPage() {
   );
 }
 
-export default CheckoutPage;
+export default Checkout;

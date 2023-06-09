@@ -20,9 +20,7 @@ function Whislist() {
               <li className="breadcrumb-item">
                 <a href="index.html">Home</a>
               </li>
-              <li className="breadcrumb-item">
-                <a href="#">Shop</a>
-              </li>
+
               <li className="breadcrumb-item active" aria-current="page">
                 Wishlist
               </li>
