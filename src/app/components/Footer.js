@@ -1,49 +1,13 @@
 import React from "react";
+import CTA from "./CTA";
+import PaymentCTA from "./PaymentCTA";
 
 function Footer() {
   return (
     <>
-      <footer className="footer">
-        <div
-          class="cta bg-image bg-dark pt-4 pb-5 mb-0"
-          style={{
-            backgroundImage: "url(assets/images/demos/demo-4/bg-5.jpg)",
-          }}
-        >
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-sm-10 col-md-8 col-lg-6">
-                <div class="cta-heading text-center">
-                  <h3 class="cta-title1 text-white">Get The Latest Deals</h3>
-                  <p class="cta-desc text-white">
-                    and receive
-                    <span class="font-weight-normal fs-5"> $20 coupon</span> for
-                    first shopping
-                  </p>
-                </div>
-
-                <form action="#">
-                  <div class="input-group input-group-round">
-                    <input
-                      type="email"
-                      class="form-control form-control-white"
-                      placeholder="Enter your Email Address"
-                      aria-label="Email Adress"
-                      required
-                    />
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="submit">
-                        <span>Subscribe</span>
-                        <i class="icon-long-arrow-right"></i>
-                      </button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <footer className="footer footer-2">
+        <PaymentCTA />
+        <CTA />
         <div className="footer-middle">
           <div className="container">
             <div className="row">
@@ -57,7 +21,7 @@ function Footer() {
 
                   <div className="social-icons">
                     <a
-                      href="#"
+                      href="#12"
                       className="social-icon"
                       title="Facebook"
                       target="_blank"

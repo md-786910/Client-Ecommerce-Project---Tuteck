@@ -8,11 +8,9 @@ function ErrorPage() {
           <div class="container">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <a href="/">Home</a>
               </li>
-              <li class="breadcrumb-item">
-                <a href="#1">Pages</a>
-              </li>
+
               <li class="breadcrumb-item active" aria-current="page">
                 404
               </li>
@@ -29,10 +27,7 @@ function ErrorPage() {
           <div class="container">
             <h1 class="error-title">Error 404</h1>
             <p>We are sorry, the page you've requested is not available.</p>
-            <a
-              href="index.html"
-              class="btn btn-outline-primary-2 btn-minwidth-lg"
-            >
+            <a href="/" class="btn btn-outline-primary-2 btn-minwidth-lg">
               <span>BACK TO HOMEPAGE</span>
               <i class="icon-long-arrow-right"></i>
             </a>
