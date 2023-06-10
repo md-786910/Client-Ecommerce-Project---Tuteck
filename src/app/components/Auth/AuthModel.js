@@ -1,19 +1,14 @@
 import React from "react";
-import { Modal } from "bootstrap";
+import { Modal } from "react-bootstrap";
 
-function LoginRegister(props) {
+function AuthModel(props) {
   const { show, handleClose } = props;
 
   return (
     <>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
+          <button type="button" class="close" onClick={handleClose}>
             <span aria-hidden="true">
               <i class="icon-close"></i>
             </span>
@@ -202,4 +197,4 @@ function LoginRegister(props) {
   );
 }
 
-export default LoginRegister;
+export default AuthModel;

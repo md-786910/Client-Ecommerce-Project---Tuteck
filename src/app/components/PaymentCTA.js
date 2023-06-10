@@ -3,7 +3,7 @@ import React from "react";
 function PaymentCTA() {
   return (
     <>
-      <div class="icon-boxes-container">
+      <div class="icon-boxes-container mt-5">
         <div class="container">
           <div class="row">
             <div class="col-sm-6 col-lg-3">

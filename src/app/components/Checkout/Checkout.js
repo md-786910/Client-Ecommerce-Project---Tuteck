@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Checkout() {
   return (
@@ -18,7 +19,7 @@ function Checkout() {
           <div class="container">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <Link to="/">Home</Link>
               </li>
 
               <li class="breadcrumb-item active" aria-current="page">

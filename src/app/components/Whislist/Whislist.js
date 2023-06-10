@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Whislist() {
   return (
@@ -18,7 +19,7 @@ function Whislist() {
           <div className="container">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <Link to="/">Home</Link>
               </li>
 
               <li className="breadcrumb-item active" aria-current="page">
