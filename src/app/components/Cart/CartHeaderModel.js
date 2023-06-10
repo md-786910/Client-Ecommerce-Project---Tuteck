@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function CartHeaderModel() {
   return (
@@ -8,7 +9,9 @@ function CartHeaderModel() {
           <div className="product">
             <div className="product-cart-details">
               <h4 className="product-title">
-                <a href="product.html">Beige knitted elastic runner shoes</a>
+                <a href={`/product/${123343}`}>
+                  Beige knitted elastic runner shoes
+                </a>
               </h4>
 
               <span className="cart-product-info">
@@ -17,12 +20,12 @@ function CartHeaderModel() {
             </div>
 
             <figure className="product-image-container">
-              <a href="product.html" className="product-image">
+              <Link to={`/product/${123343}`} className="product-image">
                 <img
-                  src="assets/images/products/cart/product-1.jpg"
+                  src="/assets/images/products/cart/product-1.jpg"
                   alt="product"
                 />
-              </a>
+              </Link>
             </figure>
             <a href="#" className="btn-remove" title="Remove Product">
               <i className="icon-close"></i>
@@ -32,7 +35,9 @@ function CartHeaderModel() {
           <div className="product">
             <div className="product-cart-details">
               <h4 className="product-title">
-                <a href="product.html">Blue utility pinafore denim dress</a>
+                <Link to={`/product/${123343}`}>
+                  Blue utility pinafore denim dress
+                </Link>
               </h4>
 
               <span className="cart-product-info">
@@ -41,9 +46,9 @@ function CartHeaderModel() {
             </div>
 
             <figure className="product-image-container">
-              <a href="product.html" className="product-image">
+              <a href={`/product/${123343}`} className="product-image">
                 <img
-                  src="assets/images/products/cart/product-2.jpg"
+                  src="/assets/images/products/cart/product-2.jpg"
                   alt="product"
                 />
               </a>
@@ -61,13 +66,13 @@ function CartHeaderModel() {
         </div>
 
         <div className="dropdown-cart-action">
-          <a href="/cart" className="btn btn-primary">
+          <Link to="/cart" className="btn btn-primary">
             View Cart
-          </a>
-          <a href="/checkout" className="btn btn-outline-primary-2">
+          </Link>
+          <Link to="/checkout" className="btn btn-outline-primary-2">
             <span>Checkout</span>
             <i className="icon-long-arrow-right"></i>
-          </a>
+          </Link>
         </div>
       </div>
     </>

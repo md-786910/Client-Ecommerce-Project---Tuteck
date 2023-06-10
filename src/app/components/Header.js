@@ -1,11 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import MobileHeader from "./MobileHeader";
-import LoginRegister from "./Auth/loginRegister";
 import CartHeaderModel from "./Cart/CartHeaderModel";
+import { Link } from "react-router-dom";
+import AuthModel from "./Auth/AuthModel";
 
 function Header() {
+  const [show, setShow] = useState(false);
+
+  const handleOpen = () => {
+    setShow(true);
+  };
+
+  const handleClose = () => {
+    setShow(false);
+  };
+
   return (
     <>
+      {/*Login */}
+      <AuthModel show={show} handleClose={handleClose} />
+      {/*Login End */}
       <header className="header header-2 header-intro-clearance">
         <div className="header-middle">
           <div className="container">
@@ -15,21 +29,21 @@ function Header() {
                 <i className="icon-bars"></i>
               </button>
 
-              <a href="/" className="logo">
+              <Link to="/" className="logo">
                 <img
                   src="/assets/images/demos/demo-2/logo.png"
                   alt="Molla Logo"
                   width="105"
                   height="25"
                 />
-              </a>
+              </Link>
             </div>
 
             <div className="header-center">
               <div className="header-search header-search-extended header-search-visible header-search-no-radius d-none d-lg-block">
-                <a href="#" className="search-toggle" role="button">
+                <Link to="#" className="search-toggle" role="button">
                   <i className="icon-search"></i>
-                </a>
+                </Link>
                 <form action="#" method="get">
                   <div className="header-search-wrapper search-wrapper-wide">
                     <label for="q" className="sr-only">
@@ -53,28 +67,28 @@ function Header() {
 
             <div className="header-right">
               <div className="account">
-                <a href="dashboard.html" title="My account">
+                <Link to="/accounts" title="My account">
                   <div className="icon">
                     <i className="icon-user"></i>
                   </div>
                   <p>Account</p>
-                </a>
+                </Link>
               </div>
 
               <div className="wishlist">
-                <a href="/wishlist" title="Wishlist">
+                <Link to="/wishlist" title="Wishlist">
                   <div className="icon">
                     <i className="icon-heart-o"></i>
                     <span className="wishlist-count badge">3</span>
                   </div>
                   <p>Wishlist</p>
-                </a>
+                </Link>
               </div>
 
               {/* CART */}
               <div className="dropdown cart-dropdown">
-                <a
-                  href="#1"
+                <Link
+                  to="#1"
                   className="dropdown-toggle"
                   role="button"
                   data-toggle="dropdown"
@@ -87,16 +101,14 @@ function Header() {
                     <span className="cart-count">2</span>
                   </div>
                   <p>Cart</p>
-                </a>
+                </Link>
 
                 <CartHeaderModel />
               </div>
               {/* CART END */}
 
-              {/*Login */}
-              <LoginRegister />
               <div className="wishlist">
-                <a href="#signin-modal" data-toggle="modal" title="Wishlist">
+                <a href="#login" onClick={() => handleOpen()} title="Wishlist">
                   <div className="icon">
                     <i className="icon-heart-o1 la-map-signs"></i>
                   </div>
@@ -113,15 +125,15 @@ function Header() {
               <nav className="main-nav">
                 <ul className="menu sf-arrows">
                   <li className="megamenu-container active">
-                    <a href="/">Home</a>
+                    <Link to="/">Home</Link>
                   </li>
                   <li>
-                    <a href="/shopping">Shop</a>
+                    <Link to="/shopping">Shop</Link>
                   </li>
                   <li>
-                    <a href="product.html" className="sf-with-ul">
+                    <Link to="product.html" className="sf-with-ul">
                       Product
-                    </a>
+                    </Link>
 
                     <div className="megamenu megamenu-sm">
                       <div className="row no-gutters">
@@ -130,10 +142,10 @@ function Header() {
                             <div className="menu-title">Product Category</div>
                             <ul>
                               <li>
-                                <a href="product.html">Mens</a>
+                                <Link to="product.html">Mens</Link>
                               </li>
                               <li>
-                                <a href="product-centered.html">Womens</a>
+                                <Link to="product-centered.html">Womens</Link>
                               </li>
                             </ul>
                           </div>
@@ -141,7 +153,7 @@ function Header() {
 
                         <div className="col-md-6">
                           <div className="banner banner-overlay">
-                            <a href="category.html">
+                            <Link to="category.html">
                               <img
                                 src="assets/images/menu/banner-2.jpg"
                                 alt="Banner"
@@ -156,17 +168,17 @@ function Header() {
                                   </span>
                                 </div>
                               </div>
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>
                     </div>
                   </li>
                   <li>
-                    <a href="/about">About Us</a>
+                    <Link to="/about">About Us</Link>
                   </li>
                   <li>
-                    <a href="/contact">Contact Us</a>
+                    <Link to="/contact">Contact Us</Link>
                   </li>
                 </ul>
               </nav>
