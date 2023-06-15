@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
+import { productListingApiSlice } from "./services/productListing.service";
 // import common from "./common/reducer";
 
 //Typescript with rtk query
-// import { auditManagerApiSlice } from "@convin/redux/services/settings/auditManager.service";
 
 // Combine all reducers.
 const appReducer = combineReducers({
   //   common,
-  //   [auditManagerApiSlice.reducerPath]: auditManagerApiSlice.reducer,
+  [productListingApiSlice.reducerPath]: productListingApiSlice.reducer,
 });
 
 export const rootReducer = (state, action) => {
