@@ -13,25 +13,21 @@ function HomePage() {
   return (
     <>
       <HomeSlider />
-      <Loader />
       <ProductByCategory />
       <ProductByCategory />
       <ProductNew />
 
-      <ProductAdd
-        title="mens wear + means jacket + mens shoes + mens tshirt"
-        name="mens wear"
-      />
-      <ProductAdd title="womens wear + womes shows" name="womens wear" />
+      <ProductAdd title="mens wear " name="mens wear" />
+      <ProductAdd title="womens wear" name="womens wear" />
       <ProductAdd title="fashion" name="fashion" />
       <ProductAdd title="girl wears" name="girls fashion" />
       <ProductAdd title="electronics" name="electronics" />
 
       {/*
-      <TopSellingProduct /> */}
-
-      <DealOfDay />
+     
       <Model />
+      <TopSellingProduct /> */}
+      <DealOfDay />
     </>
   );
 }

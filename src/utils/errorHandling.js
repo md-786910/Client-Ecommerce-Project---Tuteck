@@ -1,11 +1,11 @@
 import swal from "sweetalert";
 
 export const showSuccess = (title, text = "") => {
-  return swal("Good job!", "You clicked the button!", "success");
+  return swal(title, text, "success");
 };
 export const showError = (title, text = "") => {
-  return swal("Good job!", "You clicked the button!", "error");
+  return swal(title, text, "error");
 };
 export const showWarn = (title, text = "") => {
-  return swal("Good job!", "You clicked the button!", "warning");
+  return swal(title, text, "warning");
 };

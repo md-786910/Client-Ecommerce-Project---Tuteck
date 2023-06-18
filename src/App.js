@@ -19,8 +19,14 @@ import ContactPage from "./app/pages/ContactPage";
 import SingleProduct from "./app/components/Product/SingleProduct";
 import AccountPage from "./app/pages/AccountPage";
 import CategoryProductAll from "./app/components/Product/categortProduct/CategoryProductView";
+import { useState } from "react";
 
 function App() {
+  const [render, setRender] = useState(Math.random());
+  const renderHeader = () => {
+    setRender(Math.random());
+  };
+
   // use Location
   const ScrollToTop = () => {
     const location = useLocation();
@@ -33,11 +39,11 @@ function App() {
   return (
     <div className="App-container">
       <Router>
-        <Header />
+        <Header renderHeader={renderHeader} />
         <ScrollTop />
         <ScrollToTop />
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage render={render} />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/wishlist" element={<WhislistPage />} />

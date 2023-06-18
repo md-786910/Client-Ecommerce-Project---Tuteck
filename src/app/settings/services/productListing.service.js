@@ -3,7 +3,7 @@ import { productUrl } from "../endpoint/baseUrl";
 
 export const productListingApiSlice = createApi({
   reducerPath: "productListingApiSlice",
-  keepUnusedDataFor: 30,
+  keepUnusedDataFor: 0,
   refetchOnFocus: true,
   refetchOnReconnect: true,
 

@@ -1,25 +1,130 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Modal } from "react-bootstrap";
+import {
+  useLoginUserMutation,
+  useRegisterUserMutation,
+} from "../../settings/services/auth.service";
+import { showError, showSuccess } from "../../../utils/errorHandling";
+import BtnLoader from "../../../utils/BtnLoader";
+import ForgotPasswordModel from "./ForgotPasswordModel";
+import { useState } from "react";
 
 function AuthModel(props) {
   const { show, handleClose } = props;
 
+  // for forgot password model
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+    handleClose();
+  };
+
+  const handleCloseModel = () => {
+    setOpen(false);
+  };
+
+  const [
+    registerUser,
+    { isLoading: isRegistering, isSuccess, isError, error },
+  ] = useRegisterUserMutation();
+
+  const [
+    loginUser,
+    {
+      data: loginData,
+      isLoading: isLogining,
+      isSuccess: isLoginSucc,
+      isError: isLoginError,
+      error: loginError,
+    },
+  ] = useLoginUserMutation();
+
+  // register users
+  const nameRef = useRef("");
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+
+  // for login
+  const loginNameRef = useRef("");
+  const loginPaswordRef = useRef("");
+
+  const confirmPasswordRef = useRef("");
+  const HandleRegistration = async (e) => {
+    e.preventDefault();
+    try {
+      const name = nameRef.current?.value;
+      const email = emailRef.current?.value;
+      const password = passwordRef.current?.value;
+      const confirm_password = confirmPasswordRef.current?.value;
+
+      if (!name || !email || !password || !confirm_password) {
+        return showError("All fields are required", "fill fields properly");
+      } else {
+        registerUser({ name, email, password, confirm_password });
+      }
+    } catch (error) {
+      showError("Registration failed");
+    }
+  };
+  if (isError) {
+    showError(error?.data?.message, "Registration failed");
+  }
+  if (isSuccess) {
+    showSuccess("User Registration Successfully");
+  }
+
+  // Login
+  const HandleLogin = async (e) => {
+    e.preventDefault();
+    const email = loginNameRef.current?.value;
+    const password = loginPaswordRef?.current?.value;
+
+    console.log(email, password);
+
+    try {
+      if (!email || !password) {
+        showError("All fields are required", "fill fields properly");
+      } else {
+        loginUser({ email, password });
+      }
+    } catch (error) {
+      showError("Login failed");
+    }
+  };
+  if (isLoginError) {
+    showError(loginError?.data?.message, "Login failed");
+  }
+  if (isLoginSucc) {
+    localStorage.setItem(
+      "authentication",
+      JSON.stringify({
+        token: loginData.token,
+        user: loginData.data,
+      })
+    );
+
+    window.location.reload();
+    showSuccess("User login  successfully");
+  }
+
   return (
     <>
+      <ForgotPasswordModel show={open} handleClose={handleCloseModel} />
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>
-          <button type="button" class="close" onClick={handleClose}>
+          <button type="button" className="close" onClick={handleClose}>
             <span aria-hidden="true">
-              <i class="icon-close"></i>
+              <i className="icon-close"></i>
             </span>
           </button>
 
-          <div class="form-box">
-            <div class="form-tab">
-              <ul class="nav nav-pills nav-fill" role="tablist">
-                <li class="nav-item">
+          <div className="form-box">
+            <div className="form-tab">
+              <ul className="nav nav-pills nav-fill" role="tablist">
+                <li className="nav-item">
                   <a
-                    class="nav-link active"
+                    className="nav-link active"
                     id="signin-tab"
                     data-toggle="tab"
                     href="#signin"
@@ -30,9 +135,9 @@ function AuthModel(props) {
                     Sign In
                   </a>
                 </li>
-                <li class="nav-item">
+                <li className="nav-item">
                   <a
-                    class="nav-link"
+                    className="nav-link"
                     id="register-tab"
                     data-toggle="tab"
                     href="#register"
@@ -44,125 +149,165 @@ function AuthModel(props) {
                   </a>
                 </li>
               </ul>
-              <div class="tab-content" id="tab-content-5">
+              <div className="tab-content" id="tab-content-5">
                 <div
-                  class="tab-pane fade show active"
+                  className="tab-pane fade show active"
                   id="signin"
                   role="tabpanel"
                   aria-labelledby="signin-tab"
                 >
-                  <form action="#">
-                    <div class="form-group">
+                  <form onSubmit={(e) => HandleLogin(e)}>
+                    <div className="form-group">
                       <label for="singin-email">
                         Username or email address *
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="singin-email"
                         name="singin-email"
+                        ref={loginNameRef}
                         required
                       />
                     </div>
 
-                    <div class="form-group">
+                    <div className="form-group">
                       <label for="singin-password">Password *</label>
                       <input
                         type="password"
-                        class="form-control"
+                        className="form-control"
                         id="singin-password"
                         name="singin-password"
+                        ref={loginPaswordRef}
                         required
                       />
                     </div>
 
-                    <div class="form-footer">
-                      <button type="submit" class="btn btn-outline-primary-2">
-                        <span>LOG IN</span>
-                        <i class="icon-long-arrow-right"></i>
+                    <div className="form-footer">
+                      <button
+                        type="submit"
+                        className="btn btn-outline-primary-2"
+                        disabled={isLogining}
+                      >
+                        {isLogining ? <BtnLoader /> : <span>LOGIN IN</span>}
+                        <i className="icon-long-arrow-right"></i>
                       </button>
 
-                      <div class="custom-control custom-checkbox">
+                      <div className="custom-control custom-checkbox">
                         <input
                           type="checkbox"
-                          class="custom-control-input"
+                          className="custom-control-input"
                           id="signin-remember"
+                          required
                         />
                         <label
-                          class="custom-control-label"
+                          className="custom-control-label"
                           for="signin-remember"
                         >
                           Remember Me
                         </label>
                       </div>
 
-                      <a href="#" class="forgot-link">
+                      <a
+                        href="#"
+                        onClick={() => handleOpen()}
+                        className="forgot-link"
+                      >
                         Forgot Your Password?
                       </a>
                     </div>
                   </form>
-                  <div class="form-choice">
-                    <p class="text-center">or sign in with</p>
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <a href="#" class="btn btn-login btn-g">
-                          <i class="icon-google"></i>
+                  <div className="form-choice">
+                    <p className="text-center">or sign in with</p>
+                    <div className="row">
+                      <div className="col-sm-6">
+                        <a href="#" className="btn btn-login btn-g">
+                          <i className="icon-google"></i>
                           Login With Google
                         </a>
                       </div>
-                      <div class="col-sm-6">
-                        <a href="#" class="btn btn-login btn-f">
-                          <i class="icon-facebook-f"></i>
+                      <div className="col-sm-6">
+                        <a href="#" className="btn btn-login btn-f">
+                          <i className="icon-facebook-f"></i>
                           Login With Facebook
                         </a>
                       </div>
                     </div>
                   </div>
                 </div>
+
                 <div
-                  class="tab-pane fade"
+                  className="tab-pane fade"
                   id="register"
                   role="tabpanel"
                   aria-labelledby="register-tab"
                 >
-                  <form action="#">
-                    <div class="form-group">
+                  <form onSubmit={(e) => HandleRegistration(e)}>
+                    <div className="form-group">
+                      <label for="register-email">Your name *</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="register-name"
+                        name="register-name"
+                        ref={nameRef}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
                       <label for="register-email">Your email address *</label>
                       <input
                         type="email"
-                        class="form-control"
+                        className="form-control"
                         id="register-email"
                         name="register-email"
+                        ref={emailRef}
                         required
                       />
                     </div>
 
-                    <div class="form-group">
+                    <div className="form-group">
                       <label for="register-password">Password *</label>
                       <input
                         type="password"
-                        class="form-control"
+                        className="form-control"
                         id="register-password"
                         name="register-password"
+                        ref={passwordRef}
+                        required
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label for="register-password">Confirm password *</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="register-password"
+                        name="register-conPassword"
+                        ref={confirmPasswordRef}
                         required
                       />
                     </div>
 
-                    <div class="form-footer">
-                      <button type="submit" class="btn btn-outline-primary-2">
-                        <span>SIGN UP</span>
-                        <i class="icon-long-arrow-right"></i>
+                    <div className="form-footer">
+                      <button
+                        type="submit"
+                        className="btn btn-outline-primary-2"
+                        disabled={isRegistering}
+                      >
+                        {isRegistering ? <BtnLoader /> : <span>REGISTER</span>}
+                        <i className="icon-long-arrow-right"></i>
                       </button>
 
-                      <div class="custom-control custom-checkbox">
+                      <div className="custom-control custom-checkbox">
                         <input
                           type="checkbox"
-                          class="custom-control-input"
+                          className="custom-control-input"
                           id="register-policy"
                           required
                         />
                         <label
-                          class="custom-control-label"
+                          className="custom-control-label"
                           for="register-policy"
                         >
                           I agree to the <a href="#">privacy policy</a> *
@@ -170,18 +315,18 @@ function AuthModel(props) {
                       </div>
                     </div>
                   </form>
-                  <div class="form-choice">
-                    <p class="text-center">or sign in with</p>
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <a href="#" class="btn btn-login btn-g">
-                          <i class="icon-google"></i>
+                  <div className="form-choice">
+                    <p className="text-center">or sign in with</p>
+                    <div className="row">
+                      <div className="col-sm-6">
+                        <a href="#" className="btn btn-login btn-g">
+                          <i className="icon-google"></i>
                           Login With Google
                         </a>
                       </div>
-                      <div class="col-sm-6">
-                        <a href="#" class="btn btn-login  btn-f">
-                          <i class="icon-facebook-f"></i>
+                      <div className="col-sm-6">
+                        <a href="#" className="btn btn-login  btn-f">
+                          <i className="icon-facebook-f"></i>
                           Login With Facebook
                         </a>
                       </div>

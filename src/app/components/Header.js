@@ -3,14 +3,16 @@ import MobileHeader from "./MobileHeader";
 import CartHeaderModel from "./Cart/CartHeaderModel";
 import { Link } from "react-router-dom";
 import AuthModel from "./Auth/AuthModel";
+import { handleLogout, isAutheticated } from "./utils/authHelper";
 
 function Header() {
-  const [show, setShow] = useState(false);
+  // for authentication
+  const { token } = isAutheticated();
 
+  const [show, setShow] = useState(false);
   const handleOpen = () => {
     setShow(true);
   };
-
   const handleClose = () => {
     setShow(false);
   };
@@ -66,54 +68,67 @@ function Header() {
             </div>
 
             <div className="header-right">
-              <div className="account">
-                <Link to="/accounts" title="My account">
-                  <div className="icon">
-                    <i className="icon-user"></i>
+              {token && (
+                <>
+                  <div className="account">
+                    <Link to="/accounts" title="My account">
+                      <div className="icon">
+                        <i className="icon-user"></i>
+                      </div>
+                      <p>Account</p>
+                    </Link>
                   </div>
-                  <p>Account</p>
-                </Link>
-              </div>
 
-              <div className="wishlist">
-                <Link to="/wishlist" title="Wishlist">
-                  <div className="icon">
-                    <i className="icon-heart-o"></i>
-                    <span className="wishlist-count badge">3</span>
+                  <div className="wishlist">
+                    <Link to="/wishlist" title="Wishlist">
+                      <div className="icon">
+                        <i className="icon-heart-o"></i>
+                        <span className="wishlist-count badge">3</span>
+                      </div>
+                      <p>Wishlist</p>
+                    </Link>
                   </div>
-                  <p>Wishlist</p>
-                </Link>
-              </div>
 
-              {/* CART */}
-              <div className="dropdown cart-dropdown">
-                <Link
-                  to="#1"
-                  className="dropdown-toggle"
-                  role="button"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                  data-display="static"
-                >
-                  <div className="icon">
-                    <i className="icon-shopping-cart"></i>
-                    <span className="cart-count">2</span>
+                  {/* CART */}
+                  <div className="dropdown cart-dropdown">
+                    <Link
+                      to="#1"
+                      className="dropdown-toggle"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      data-display="static"
+                    >
+                      <div className="icon">
+                        <i className="icon-shopping-cart"></i>
+                        <span className="cart-count">2</span>
+                      </div>
+                      <p>Cart</p>
+                    </Link>
+
+                    <CartHeaderModel />
                   </div>
-                  <p>Cart</p>
-                </Link>
-
-                <CartHeaderModel />
-              </div>
+                </>
+              )}
               {/* CART END */}
 
               <div className="wishlist">
-                <a href="#login" onClick={() => handleOpen()} title="Wishlist">
-                  <div className="icon">
-                    <i className="icon-heart-o1 la-map-signs"></i>
-                  </div>
-                  <p>Register</p>
-                </a>
+                {token ? (
+                  <a href="#" onClick={() => handleLogout()} title="Wishlist">
+                    <div className="icon">
+                      <i class="fa-solid   fa-arrow-right-from-bracket"></i>
+                    </div>
+                    <p>Logout</p>
+                  </a>
+                ) : (
+                  <Link to="#" onClick={() => handleOpen()} title="Wishlist">
+                    <div className="icon">
+                      <i class="fa-regular fa-user"></i>
+                    </div>
+                    <p>Login/Register</p>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
