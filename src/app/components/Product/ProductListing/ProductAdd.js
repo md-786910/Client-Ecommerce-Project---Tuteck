@@ -9,7 +9,6 @@ function ProductAdd(props) {
   const { title, name } = props;
 
   const { data, isLoading, isError, error } = useGetAllProductQuery(title);
-  console.log(data);
   if (isError) {
     return showError(error);
   }

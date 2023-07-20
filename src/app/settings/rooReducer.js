@@ -1,11 +1,13 @@
 import { combineReducers } from "redux";
 import { productListingApiSlice } from "./services/productListing.service";
 import { authApiSlice } from "./services/auth.service";
-// import common from "./common/reducer";
+import whislistReducer from "./services/whislist/whislist.slice";
+import authLoginReducer from "./services/auth/auth.slice";
 
 // Combine all reducers.
 const appReducer = combineReducers({
-  //   common,
+  whislist: whislistReducer,
+  toogle: authLoginReducer,
   [productListingApiSlice.reducerPath]: productListingApiSlice.reducer,
   [authApiSlice.reducerPath]: authApiSlice.reducer,
 });

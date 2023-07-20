@@ -1,11 +1,14 @@
 import swal from "sweetalert";
 
-export const showSuccess = (title, text = "") => {
-  return swal(title, text, "success");
+export const showSuccess = (error, text = "") => {
+  return swal(error, text, "success");
 };
-export const showError = (title, text = "") => {
-  return swal(title, text, "error");
+export const showError = (error, text = "") => {
+  return swal(error, text, "error");
 };
-export const showWarn = (title, text = "") => {
-  return swal(title, text, "warning");
+export const showApiError = (error, text = "") => {
+  return swal(error?.response?.data?.message, text, "error");
+};
+export const showWarn = (error, text = "") => {
+  return swal(error, text, "warning");
 };
