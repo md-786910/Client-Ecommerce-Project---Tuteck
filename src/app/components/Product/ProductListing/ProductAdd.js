@@ -7,7 +7,6 @@ import { Col, Row } from "react-bootstrap";
 
 function ProductAdd(props) {
   const { title, name } = props;
-
   const { data, isLoading, isError, error } = useGetAllProductQuery(title);
   if (isError) {
     return showError(error);
@@ -38,7 +37,7 @@ function ProductAdd(props) {
             <div className="tab-pane p-0  show active" id="tab-carousel-1 ">
               <div className="">
                 <Row>
-                  {data?.results?.slice(0, 8).map((prod) => {
+                  {data?.results?.map((prod) => {
                     let url = prod.url;
                     let productId;
                     const regex = /\/dp\/([A-Z0-9]+)\//;
@@ -82,22 +81,15 @@ function ProductAdd(props) {
                                   />
                                 </div>
                               </Link>
-
-                              <div className="product-action-vertical">
-                                <a
-                                  href="#1"
-                                  className="btn-product-icon btn-wishlist"
-                                >
-                                  <span>add to wishlist</span>
-                                </a>
-                              </div>
                             </figure>
 
                             <div className="product-body">
                               <h3 className="product-title">
-                                <a href="product.html">Butler Stool Ladder</a>
+                                <a>{prod?.name.slice(0, 30)}...</a>
                               </h3>
-                              <div className="product-price">$251,00</div>
+                              <div className="product-price">
+                                {prod?.price_string}
+                              </div>
                             </div>
                             <div className="product-action">
                               <a href="#1" className="btn-product btn-cart">
