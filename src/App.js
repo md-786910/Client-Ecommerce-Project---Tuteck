@@ -1,11 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import Header from "./app/components/Header";
 import Footer from "./app/components/Footer";
 import ScrollTop from "./app/components/ScrollTop";
@@ -19,45 +14,71 @@ import ContactPage from "./app/pages/ContactPage";
 import SingleProduct from "./app/components/Product/SingleProduct";
 import AccountPage from "./app/pages/AccountPage";
 import CategoryProductAll from "./app/components/Product/categortProduct/CategoryProductView";
-import { useState } from "react";
+import { Protected } from "./app/components/utils/Protected";
+import { useCallback } from "react";
+import { isAutheticated } from "./app/components/utils/authHelper";
+import AuthModel from "./app/components/Auth/AuthModel";
 
 function App() {
-  const [render, setRender] = useState(Math.random());
-  const renderHeader = () => {
-    setRender(Math.random());
-  };
+  const { token } = isAutheticated();
+  const navigate = useNavigate();
+
+  const HeaderLayout = useCallback(() => {
+    if (token && window.location.pathname === "/auth") {
+      navigate("/");
+    } else if (!token && window.location.pathname === "/") {
+      navigate("/auth");
+    } else if (token && window.location.pathname === "/forgotPassword") {
+      navigate("/branch");
+    } else {
+      return;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
 
   // use Location
   const ScrollToTop = () => {
     const location = useLocation();
-
     useEffect(() => {
       window.scrollTo(0, 0);
     }, [location.pathname]);
   };
 
+  useEffect(() => {
+    HeaderLayout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="App-container">
-      <Router>
-        <Header renderHeader={renderHeader} />
-        <ScrollTop />
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<HomePage render={render} />} />
-          <Route path="/cart" element={<CartPage />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/wishlist" element={<WhislistPage />} />
-          <Route path="/product/:productId" element={<SingleProduct />} />
-          <Route
-            path="/productCategory/:category"
-            element={<CategoryProductAll />}
-          />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+      <Header />
+      <ScrollTop />
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/auth" element={<AuthModel />} />
+
+        <Route exact path="/" element={<Protected />}>
+          <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
+        </Route>
+
+        <Route path="/wishlist" element={<WhislistPage />} />
+        <Route path="/product/:productId" element={<SingleProduct />} />
+        <Route
+          path="/productCategory/:category"
+          element={<CategoryProductAll />}
+        />
+
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+
+        <Route element={<Protected />}>
           <Route path="/accounts/*" element={<AccountPage />} />
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
-      </Router>
+        </Route>
+
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
       <Footer />
     </div>
   );

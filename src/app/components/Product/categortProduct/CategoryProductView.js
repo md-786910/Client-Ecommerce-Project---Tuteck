@@ -109,7 +109,8 @@ function CategoryProductAll() {
                                 </Link>
                               </div>
 
-                              <div className="product-action action-icon-top">
+                              {/*
+                             <div className="product-action action-icon-top">
                                 <Link to="#" className="btn-product btn-cart">
                                   <span>add to cart</span>
                                 </Link>
@@ -128,6 +129,7 @@ function CategoryProductAll() {
                                   <span>compare</span>
                                 </Link>
                               </div>
+                            */}
                             </figure>
 
                             <div className="product-body">

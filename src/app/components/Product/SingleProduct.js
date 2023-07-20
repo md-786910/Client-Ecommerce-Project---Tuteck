@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailByIdQuery } from "../../settings/services/productListing.service";
 import { showError } from "../../../utils/errorHandling";
 import { useState } from "react";
 import Loader from "../../../utils/Loader";
+import { useDispatch } from "react-redux";
+import { setLocalStorage } from "../../settings/services/whislist/whislist.slice";
+import Description from "./productListingSingleView/Description";
+import Information from "./productListingSingleView/Information";
+import ShippingReturn from "./productListingSingleView/ShippingReturn";
+import Review from "./productListingSingleView/Review";
 
 function SingleProduct() {
+  const dispatch = useDispatch();
+
   const { productId } = useParams();
+  const [qty, setQty] = useState(0);
 
   const { data, isLoading, isError, error } =
     useGetProductDetailByIdQuery(productId);
@@ -16,15 +25,23 @@ function SingleProduct() {
     setImage(img);
   };
 
-  const addToCart = (productId) => {
-    alert(productId);
+  // state qty
+  const addQuantity = (val) => {
+    setQty(val);
   };
-  const addToWhislist = (productId) => {
-    alert(productId);
+
+  const addToCart = (productId) => {
+    // alert(productId);
+  };
+  const addToWhislist = (data) => {
+    if (data) {
+      const { name, pricing, images } = data;
+      dispatch(setLocalStorage({ name, images, pricing, productId }));
+    }
   };
 
   if (isError) {
-    return showError(error);
+    showError(error?.message);
   }
 
   return (
@@ -38,7 +55,7 @@ function SingleProduct() {
               </li>
 
               <li className="breadcrumb-item active" aria-current="page">
-                {productId}
+                {data?.product_category}
               </li>
             </ol>
           </div>
@@ -130,7 +147,7 @@ function SingleProduct() {
                         </Link>
                       </div>
 
-                      <div className="product-price">$84.00</div>
+                      <div className="product-price">{data?.pricing}</div>
 
                       <div className="details-filter-row details-row-size">
                         <label>
@@ -201,9 +218,10 @@ function SingleProduct() {
                             type="number"
                             id="qty"
                             className="form-control"
-                            value="1"
                             min="1"
-                            max="10"
+                            max="5"
+                            value={qty}
+                            onChange={(e) => addQuantity(e.target.value)}
                             step="1"
                             data-decimals="0"
                             required
@@ -225,7 +243,7 @@ function SingleProduct() {
                             href="#1"
                             className="btn-product btn-wishlist"
                             title="Wishlist"
-                            onClick={() => addToWhislist(productId)}
+                            onClick={() => addToWhislist(data)}
                           >
                             <span>Add to Wishlist</span>
                           </a>
@@ -238,257 +256,45 @@ function SingleProduct() {
 
               {/* product description */}
               <div className="product-details-tab">
-                <ul
-                  className="nav nav-pills justify-content-center"
-                  role="tablist"
-                >
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link active"
-                      id="product-desc-link"
-                      data-toggle="tab"
-                      href="#product-desc-tab"
-                      role="tab"
-                      aria-controls="product-desc-tab"
-                      aria-selected="true"
-                    >
-                      Description
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      id="product-info-link"
-                      data-toggle="tab"
-                      href="#product-info-tab"
-                      role="tab"
-                      aria-controls="product-info-tab"
-                      aria-selected="false"
-                    >
-                      Additional information
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      id="product-shipping-link"
-                      data-toggle="tab"
-                      href="#product-shipping-tab"
-                      role="tab"
-                      aria-controls="product-shipping-tab"
-                      aria-selected="false"
-                    >
-                      Shipping & Returns
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link
-                      className="nav-link"
-                      id="product-review-link"
-                      data-toggle="tab"
-                      href="#product-review-tab"
-                      role="tab"
-                      aria-controls="product-review-tab"
-                      aria-selected="false"
-                    >
-                      Reviews (2)
-                    </Link>
-                  </li>
-                </ul>
-                <div className="tab-content">
-                  <div
-                    className="tab-pane fade show active"
-                    id="product-desc-tab"
-                    role="tabpanel"
-                    aria-labelledby="product-desc-link"
-                  >
-                    <div className="product-desc-content">
-                      <h3>Product Information</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Donec odio. Quisque volutpat mattis eros. Nullam
-                        malesuada erat ut turpis. Suspendisse urna viverra non,
-                        semper suscipit, posuere Link, pede. Donec nec justo
-                        eget felis facilisis fermentum. Aliquam porttitor mauris
-                        sit amet orci. Aenean dignissim pellentesque felis.
-                        Phasellus ultrices nulla quis nibh. Quisque Link lectus.
-                        Donec consectetuer ligula vulputate sem tristique
-                        cursus.{" "}
-                      </p>
-                      <ul>
-                        <li>
-                          Nunc nec porttitor turpis. In eu risus enim. In vitae
-                          mollis elit.{" "}
-                        </li>
-                        <li>Vivamus finibus vel mauris ut vehicula.</li>
-                        <li>
-                          Nullam Link magna porttitor, dictum risus nec,
-                          faucibus sapien.
-                        </li>
-                      </ul>
+                <div className="product-desc-content mb-4">
+                  <h2>Product Information</h2>
+                  <hr className="my-1" />
 
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Donec odio. Quisque volutpat mattis eros. Nullam
-                        malesuada erat ut turpis. Suspendisse urna viverra non,
-                        semper suscipit, posuere Link, pede. Donec nec justo
-                        eget felis facilisis fermentum. Aliquam porttitor mauris
-                        sit amet orci. Aenean dignissim pellentesque felis.
-                        Phasellus ultrices nulla quis nibh. Quisque Link lectus.
-                        Donec consectetuer ligula vulputate sem tristique
-                        cursus.{" "}
-                      </p>
-                    </div>
+                  {data?.product_information && (
+                    <table className="table table-bordered p-2">
+                      <tbody>
+                        {Object.entries(data?.product_information).map(
+                          ([key, value]) => (
+                            <tr key={key}>
+                              <td>{key}</td>
+                              <td>
+                                {typeof value === "object"
+                                  ? JSON.stringify(value) // Display nested object as JSON string
+                                  : Array.isArray(value)
+                                  ? value.join(", ")
+                                  : value}
+                              </td>
+                            </tr>
+                          )
+                        )}
+                      </tbody>
+                    </table>
+                  )}
+                </div>
+                <div className="product-desc-content mb-4">
+                  <h2>Product Description</h2>
+                  <hr className="my-1" />
+
+                  <div className="ul">
+                    {data?.full_description.split("\n").map((item) => {
+                      return <li className="li mb-1">{item}</li>;
+                    })}
                   </div>
-                  <div
-                    className="tab-pane fade"
-                    id="product-info-tab"
-                    role="tabpanel"
-                    aria-labelledby="product-info-link"
-                  >
-                    <div className="product-desc-content">
-                      <h3>Information</h3>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing
-                        elit. Donec odio. Quisque volutpat mattis eros. Nullam
-                        malesuada erat ut turpis. Suspendisse urna viverra non,
-                        semper suscipit, posuere Link, pede. Donec nec justo
-                        eget felis facilisis fermentum. Aliquam porttitor mauris
-                        sit amet orci.{" "}
-                      </p>
 
-                      <h3>Fabric & care</h3>
-                      <ul>
-                        <li>Faux suede fabric</li>
-                        <li>Gold tone metal hoop handles.</li>
-                        <li>RI branding</li>
-                        <li>Snake print trim interior </li>
-                        <li>Adjustable cross body strap</li>
-                        <li>
-                          {" "}
-                          Height: 31cm; Width: 32cm; Depth: 12cm; Handle Drop:
-                          61cm
-                        </li>
-                      </ul>
-
-                      <h3>Size</h3>
-                      <p>one size</p>
-                    </div>
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="product-shipping-tab"
-                    role="tabpanel"
-                    aria-labelledby="product-shipping-link"
-                  >
-                    <div className="product-desc-content">
-                      <h3>Delivery & returns</h3>
-                      <p>
-                        We deliver to over 100 countries around the world. For
-                        full details of the delivery options we offer, please
-                        view our <Link href="#">Delivery information</Link>
-                        <br />
-                        We hope you’ll love every purchase, but if you ever need
-                        to return an item you can do so within Link month of
-                        receipt. For full details of how to make Link return,
-                        please view our{" "}
-                        <Link href="#">Returns information</Link>
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="product-review-tab"
-                    role="tabpanel"
-                    aria-labelledby="product-review-link"
-                  >
-                    <div className="reviews">
-                      <h3>Reviews (2)</h3>
-                      <div className="review">
-                        <div className="row no-gutters">
-                          <div className="col-auto">
-                            <h4>
-                              <Link href="#">Samanta J.</Link>
-                            </h4>
-                            <div className="ratings-container">
-                              <div className="ratings">
-                                <div
-                                  className="ratings-val"
-                                  style={{ width: "80%" }}
-                                ></div>
-                              </div>
-                            </div>
-                            <span className="review-date">6 days ago</span>
-                          </div>
-                          <div className="col">
-                            <h4>Good, perfect size</h4>
-
-                            <div className="review-content">
-                              <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipisicing elit. Ducimus cum dolores assumenda
-                                asperiores facilis porro reprehenderit animi
-                                culpa atque blanditiis commodi perspiciatis
-                                doloremque, possimus, explicabo, autem fugit
-                                beatae quae voluptas!
-                              </p>
-                            </div>
-
-                            <div className="review-action">
-                              <Link href="#">
-                                <i className="icon-thumbs-up"></i>Helpful (2)
-                              </Link>
-                              <Link href="#">
-                                <i className="icon-thumbs-down"></i>Unhelpful
-                                (0)
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="review">
-                        <div className="row no-gutters">
-                          <div className="col-auto">
-                            <h4>
-                              <Link href="#">John Doe</Link>
-                            </h4>
-                            <div className="ratings-container">
-                              <div className="ratings">
-                                <div
-                                  className="ratings-val"
-                                  style={{ width: "80%" }}
-                                ></div>
-                              </div>
-                            </div>
-                            <span className="review-date">5 days ago</span>
-                          </div>
-                          <div className="col">
-                            <h4>Very good</h4>
-
-                            <div className="review-content">
-                              <p>
-                                Sed, molestias, tempore? Ex dolor esse iure hic
-                                veniam laborum blanditiis laudantium iste amet.
-                                Cum non voluptate eos enim, ab cumque nam, modi,
-                                quas iure illum repellendus, blanditiis
-                                perspiciatis beatae!
-                              </p>
-                            </div>
-
-                            <div className="review-action">
-                              <Link href="#">
-                                <i className="icon-thumbs-up"></i>Helpful (0)
-                              </Link>
-                              <Link href="#">
-                                <i className="icon-thumbs-down"></i>Unhelpful
-                                (0)
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="ul mt-3">
+                    {data?.full_description.split("-").map((item) => {
+                      return <li className="li mb-1">{item}</li>;
+                    })}
                   </div>
                 </div>
               </div>

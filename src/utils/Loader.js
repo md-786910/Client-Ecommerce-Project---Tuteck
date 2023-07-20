@@ -1,5 +1,5 @@
 import React from "react";
-import { FadeLoader } from "react-spinners";
+import { FadeLoader, BeatLoader, PropagateLoader } from "react-spinners";
 
 function Loader({ loader = false }) {
   return (
@@ -16,11 +16,11 @@ function Loader({ loader = false }) {
           webkitBbackdropackdropFilter: "blur(5px)",
         }}
       >
-        <FadeLoader
+        <PropagateLoader
           color="#a6c76c"
           height={20}
           loading={loader}
-          speedMultiplier={1}
+          speedMultiplier={2}
           cssOverride={{
             display: "flex",
             justifyContent: "center",
