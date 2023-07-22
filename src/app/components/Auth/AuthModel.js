@@ -63,19 +63,19 @@ function AuthModel(props) {
       const confirm_password = confirmPasswordRef.current?.value;
 
       if (!name || !email || !password || !confirm_password) {
-        return showError("All fields are required", "fill fields properly");
+        showError("All fields are required", "fill fields properly");
       } else {
         registerUser({ name, email, password, confirm_password });
       }
     } catch (error) {
-      showError("Registration failed");
+      showError("Registration failed", "");
     }
   };
   if (isError) {
     showApiError(error, "Registration failed");
   }
   if (isSuccess) {
-    showSuccess("User Registration Successfully");
+    showSuccess("User Registration Successfully", "");
   }
 
   // Login
@@ -84,8 +84,6 @@ function AuthModel(props) {
     const email = loginNameRef.current?.value;
     const password = loginPaswordRef?.current?.value;
 
-    console.log(email, password);
-
     try {
       if (!email || !password) {
         showError("All fields are required", "fill fields properly");
@@ -93,11 +91,11 @@ function AuthModel(props) {
         loginUser({ email, password });
       }
     } catch (error) {
-      showApiError(error);
+      showApiError(error, "Login failed");
     }
   };
   if (isLoginError) {
-    showApiError(loginError, "Login failed");
+    showError(loginError?.data?.message, "Login failed");
   }
 
   if (isLoginSucc) {
@@ -269,7 +267,7 @@ function AuthModel(props) {
                   <input
                     type="password"
                     className="form-control"
-                    id="register-password"
+                    id="register-password1"
                     name="register-password"
                     ref={passwordRef}
                     required

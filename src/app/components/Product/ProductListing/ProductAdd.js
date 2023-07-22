@@ -11,7 +11,6 @@ function ProductAdd(props) {
   if (isError) {
     return showError(error);
   }
-  console.log(data);
   return (
     <>
       <div className="container">
