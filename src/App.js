@@ -18,6 +18,7 @@ import { Protected } from "./app/components/utils/Protected";
 import { useCallback } from "react";
 import { isAutheticated } from "./app/components/utils/authHelper";
 import AuthModel from "./app/components/Auth/AuthModel";
+import ProductAdd from "./app/components/Product/ProductListing/ProductAdd";
 
 function App() {
   const { token } = isAutheticated();
@@ -64,6 +65,10 @@ function App() {
         </Route>
 
         <Route path="/wishlist" element={<WhislistPage />} />
+        <Route
+          path="/shopping"
+          element={<ProductAdd title="mens cloth + womens cloth" name="" />}
+        />
         <Route path="/product/:productId" element={<SingleProduct />} />
         <Route
           path="/productCategory/:category"

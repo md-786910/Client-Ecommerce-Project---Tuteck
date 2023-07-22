@@ -100,7 +100,7 @@ function Header() {
               {token && (
                 <div className="dropdown cart-dropdown">
                   <Link
-                    to="#1"
+                    to="/cart"
                     className="dropdown-toggle"
                     role="button"
                     data-toggle="dropdown"

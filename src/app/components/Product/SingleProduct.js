@@ -1,25 +1,39 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useGetProductDetailByIdQuery } from "../../settings/services/productListing.service";
-import { showError } from "../../../utils/errorHandling";
+import { showError, showSuccess } from "../../../utils/errorHandling";
 import { useState } from "react";
 import Loader from "../../../utils/Loader";
 import { useDispatch } from "react-redux";
 import { setLocalStorage } from "../../settings/services/whislist/whislist.slice";
-import Description from "./productListingSingleView/Description";
-import Information from "./productListingSingleView/Information";
-import ShippingReturn from "./productListingSingleView/ShippingReturn";
-import Review from "./productListingSingleView/Review";
+// import Description from "./productListingSingleView/Description";
+// import Information from "./productListingSingleView/Information";
+// import ShippingReturn from "./productListingSingleView/ShippingReturn";
+// import Review from "./productListingSingleView/Review";
+import { useAddToCartMutation } from "../../settings/services/cart.service";
+import BtnLoader from "../../../utils/BtnLoader";
 
 function SingleProduct() {
   const dispatch = useDispatch();
-
   const { productId } = useParams();
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
 
   const { data, isLoading, isError, error } =
     useGetProductDetailByIdQuery(productId);
+
   const [image, setImage] = useState(data?.images[0]);
+
+  // RTQ QUERY
+  const [
+    creatingCart,
+    {
+      data: cartData,
+      isLoading: isCreating,
+      isSuccess,
+      isError: isCartError,
+      error: cartError,
+    },
+  ] = useAddToCartMutation();
 
   const handleImage = (img) => {
     setImage(img);
@@ -30,8 +44,20 @@ function SingleProduct() {
     setQty(val);
   };
 
-  const addToCart = (productId) => {
-    // alert(productId);
+  const addToCart = (prod) => {
+    const { name, images, small_description, pricing } = prod;
+    const actPrice = pricing.split("$").filter(Boolean);
+
+    const data = {
+      productId,
+      name,
+      image: images[0],
+      description: "",
+      information: "",
+      price: parseInt(actPrice[0]),
+      qty: parseInt(qty),
+    };
+    creatingCart(data);
   };
   const addToWhislist = (data) => {
     if (data) {
@@ -43,6 +69,20 @@ function SingleProduct() {
   if (isError) {
     showError(error?.message);
   }
+  if (isCartError) {
+    showError(cartError?.data?.message);
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      if (cartData?.message === "product already exist!") {
+        showSuccess(cartData?.message, "", "warning");
+      } else {
+        showSuccess(cartData?.message, "");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
 
   return (
     <div>
@@ -233,9 +273,17 @@ function SingleProduct() {
                         <a
                           href="#1"
                           className="btn-product btn-cart"
-                          onClick={() => addToCart(productId)}
+                          style={{
+                            backgroundColor: isCreating ? "black" : "revert",
+                          }}
+                          onClick={() => addToCart(data)}
+                          disabled={isCreating}
                         >
-                          <span>add to cart</span>
+                          {isCreating ? (
+                            <BtnLoader />
+                          ) : (
+                            <span>add to cart</span>
+                          )}
                         </a>
 
                         <div className="details-action-wrapper">
@@ -292,7 +340,7 @@ function SingleProduct() {
                   </div>
 
                   <div className="ul mt-3">
-                    {data?.full_description.split("-").map((item) => {
+                    {data?.small_description.split("-").map((item) => {
                       return <li className="li mb-1">{item}</li>;
                     })}
                   </div>

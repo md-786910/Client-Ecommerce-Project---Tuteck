@@ -3,6 +3,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import { productListingApiSlice } from "./services/productListing.service";
 import { rootReducer } from "./rooReducer";
 import { authApiSlice } from "./services/auth.service";
+import { cartApiSlice } from "./services/cart.service";
+import { orderApiSlice } from "./services/order.service";
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -11,5 +13,10 @@ export const store = configureStore({
     getDefaultMiddleware({
       immutableCheck: false,
       serializableCheck: false,
-    }).concat(productListingApiSlice.middleware, authApiSlice.middleware),
+    }).concat(
+      productListingApiSlice.middleware,
+      authApiSlice.middleware,
+      cartApiSlice.middleware,
+      orderApiSlice.middleware
+    ),
 });
