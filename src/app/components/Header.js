@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import MobileHeader from "./MobileHeader";
 import CartHeaderModel from "./Cart/CartHeaderModel";
-import { Link } from "react-router-dom";
-import AuthModel from "./Auth/AuthModel";
 import { handleLogout, isAutheticated } from "./utils/authHelper";
-import { useDispatch, useSelector } from "react-redux";
-import { handleClose, handleOpen } from "../settings/services/auth/auth.slice";
-
+import { useGetAllCartQuery } from "../settings/services/cart.service";
 function Header() {
   // for authentication
   const { token } = isAutheticated();
-  // const dispatch = useDispatch();
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const data = token ? useGetAllCartQuery() : 0;
 
   const product = useSelector((state) => state.whislist.product);
-  const { show } = useSelector((state) => state.toogle);
-  // const [show, setShow] = useState(false);
-
-  // const handleOpenBtn = () => {
-  //   dispatch(handleOpen());
-  // };
-  // const handleCloseBtn = () => {
-  //   dispatch(handleClose());
-  // };
 
   return (
     <>
@@ -110,12 +101,14 @@ function Header() {
                   >
                     <div className="icon">
                       <i className="icon-shopping-cart"></i>
-                      <span className="cart-count">2</span>
+                      <span className="cart-count">
+                        {data.data?.cart?.length || 0}
+                      </span>
                     </div>
                     <p>Cart</p>
                   </Link>
 
-                  <CartHeaderModel />
+                  {token && <CartHeaderModel />}
                 </div>
               )}
               {/* CART END */}

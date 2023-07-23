@@ -3,9 +3,11 @@ import { Link, useParams } from "react-router-dom";
 import { useGetAllProductQuery } from "../../../settings/services/productListing.service";
 import Loader from "../../../../utils/Loader";
 import { showError } from "../../../../utils/errorHandling";
-
+import { useDispatch } from "react-redux";
+import { setLocalStorage } from "../../../settings/services/whislist/whislist.slice";
 function CategoryProductAll() {
   const { category } = useParams();
+  const dispatch = useDispatch();
   const { data, isLoading, isError } = useGetAllProductQuery(category);
 
   if (isError) {
@@ -101,12 +103,21 @@ function CategoryProductAll() {
                               </Link>
 
                               <div className="product-action-vertical">
-                                <Link
-                                  to="#"
+                                <button
                                   className="btn-product-icon btn-wishlist btn-expandable"
+                                  onClick={() =>
+                                    dispatch(
+                                      setLocalStorage({
+                                        name: prod?.name,
+                                        images: [prod?.image],
+                                        pricing: prod?.price_string,
+                                        productId: productId,
+                                      })
+                                    )
+                                  }
                                 >
                                   <span>add to wishlist</span>
-                                </Link>
+                                </button>
                               </div>
 
                               {/*
@@ -141,7 +152,9 @@ function CategoryProductAll() {
                                   {prod?.name?.slice(0, 50)}...
                                 </Link>
                               </h3>
-                              <div className="product-price">$50.00</div>
+                              <div className="product-price">
+                                ${prod?.price}
+                              </div>
                               <div className="ratings-container">
                                 <div className="ratings">
                                   <div
@@ -165,6 +178,7 @@ function CategoryProductAll() {
                 <button
                   className="btn btn-outline-darker btn-load-more"
                   onClick={() => {}}
+                  disabled={true}
                 >
                   More Products <i className="icon-refresh"></i>
                 </button>

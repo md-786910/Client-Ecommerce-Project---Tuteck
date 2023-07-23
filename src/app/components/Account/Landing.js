@@ -10,7 +10,7 @@ function Landing() {
       >
         <div class="container">
           <h1 class="page-title">
-            My Account<span>Shop</span>
+            My Account<span>Order Management</span>
           </h1>
         </div>
       </div>

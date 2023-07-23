@@ -13,7 +13,7 @@ import BtnLoader from "../../../utils/BtnLoader";
 
 function Cart() {
   const navigate = useNavigate();
-
+  // const[qty,setQty] = useState()
   const [total, setTotal] = useState(0);
 
   // RTQ QUERY
@@ -40,6 +40,11 @@ function Cart() {
       error: orderError,
     },
   ] = useCreateOrderMutation();
+
+  // handle change qty
+  const handleChangeQty = (qty) => {
+    console.log(qty);
+  };
 
   // create order
   const handleCreateOrder = () => {
@@ -156,6 +161,9 @@ function Cart() {
                                     type="number"
                                     class="form-control"
                                     value={prod?.qty}
+                                    onChange={(e) =>
+                                      handleChangeQty(e.target.value)
+                                    }
                                     min="1"
                                     max="5"
                                     step="1"

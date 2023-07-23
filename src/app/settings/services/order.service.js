@@ -35,15 +35,15 @@ export const orderApiSlice = createApi({
       invalidatesTags: ["Order"],
     }),
 
-    // deleteCartById: builder.mutation({
-    //   query: (id) => {
-    //     return {
-    //       url: `/cart/cartAction/${id}`,
-    //       method: "DELETE",
-    //     };
-    //   },
-    //   invalidatesTags: ["Cart"],
-    // }),
+    deleteOrderById: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/order/actionOrder/${id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["Order"],
+    }),
   }),
 });
 
@@ -51,4 +51,6 @@ export const {
   useCreateOrderMutation,
   useGetAllOrdersQuery,
   useGetOrderByIdQuery,
+  useAddAddressMutation,
+  useDeleteOrderByIdMutation,
 } = orderApiSlice;
