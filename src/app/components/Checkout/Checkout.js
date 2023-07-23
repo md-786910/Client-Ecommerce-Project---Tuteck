@@ -1,19 +1,72 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useGetOrderByIdQuery } from "../../settings/services/order.service";
+import {
+  useAddAddressMutation,
+  useGetOrderByIdQuery,
+} from "../../settings/services/order.service";
 import { showError } from "../../../utils/errorHandling";
 import Loader from "../../../utils/Loader";
 import { paymentHandler } from "./paymentApi";
+import { useState } from "react";
+import BtnLoader from "../../../utils/BtnLoader";
 
 function Checkout() {
   const location = useLocation();
   const orderId = location.search.slice(9);
-
+  const [address, setAddress] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    city: "",
+    postalCode: "",
+    state: "",
+    country: "",
+    streetAddress: "",
+  });
   const { data, isSuccess, isLoading, isError, error } =
     useGetOrderByIdQuery(orderId);
 
+  // handle change
+  const handleChange = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setAddress({ ...address, [name]: value });
+  };
+
+  // hanlde address
+  const handleBillingAdress = () => {
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      city,
+      state,
+      country,
+      streetAddress,
+      postalCode,
+    } = address;
+
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !phone ||
+      !city ||
+      !state ||
+      !country ||
+      !streetAddress ||
+      !postalCode
+    ) {
+      showError("All fields are required", "");
+    } else {
+      // mutate
+    }
+  };
+
   if (isError) {
-    showError(error?.data?.message);
+    showError(error?.data?.message, "");
   }
 
   return (
@@ -59,7 +112,10 @@ function Checkout() {
                           <input
                             type="text"
                             className="form-control"
-                            // required
+                            name="firstName"
+                            value={address.firstName}
+                            onChange={(e) => handleChange(e)}
+                            required
                           />
                         </div>
 
@@ -68,29 +124,33 @@ function Checkout() {
                           <input
                             type="text"
                             className="form-control"
-                            // required
+                            name="lastName"
+                            value={address.lastName}
+                            onChange={(e) => handleChange(e)}
+                            required
                           />
                         </div>
                       </div>
 
-                      <label>Company Name (Optional)</label>
-                      <input type="text" className="form-control" />
-
                       <label>Country *</label>
-                      <input type="text" className="form-control" />
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="country"
+                        value={address.country}
+                        onChange={(e) => handleChange(e)}
+                        required
+                      />
 
                       <label>Street address *</label>
                       <input
                         type="text"
                         className="form-control"
                         placeholder="House number and Street name"
-                        // required
-                      />
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Appartments, suite, unit etc ..."
-                        // required
+                        name="streetAddress"
+                        value={address.streetAddress}
+                        onChange={(e) => handleChange(e)}
+                        required
                       />
 
                       <div className="row">
@@ -99,7 +159,10 @@ function Checkout() {
                           <input
                             type="text"
                             className="form-control"
-                            // required
+                            name="city"
+                            value={address.city}
+                            onChange={(e) => handleChange(e)}
+                            required
                           />
                         </div>
 
@@ -108,7 +171,10 @@ function Checkout() {
                           <input
                             type="text"
                             className="form-control"
-                            // required
+                            name="state"
+                            value={address.state}
+                            onChange={(e) => handleChange(e)}
+                            required
                           />
                         </div>
                       </div>
@@ -119,18 +185,35 @@ function Checkout() {
                           <input
                             type="text"
                             className="form-control"
-                            // required
+                            name="postalCode"
+                            value={address.postalCode}
+                            onChange={(e) => handleChange(e)}
+                            required
                           />
                         </div>
 
                         <div className="col-sm-6">
                           <label>Phone *</label>
-                          <input type="tel" className="form-control" />
+                          <input
+                            type="tel"
+                            className="form-control"
+                            name="phone"
+                            value={address.phone}
+                            onChange={(e) => handleChange(e)}
+                            required
+                          />
                         </div>
                       </div>
 
                       <label>Email address *</label>
-                      <input type="email" className="form-control" />
+                      <input
+                        type="email"
+                        className="form-control"
+                        name="email"
+                        value={address.email}
+                        onChange={(e) => handleChange(e)}
+                        required
+                      />
                     </div>
                     <aside className="col-lg-3">
                       <div className="summary">
@@ -179,7 +262,7 @@ function Checkout() {
 
                         <button
                           className="btn btn-outline-primary-2 btn-order btn-block"
-                          onClick={() => paymentHandler(orderId)}
+                          onClick={() => paymentHandler(address, orderId)}
                         >
                           <span className="btn-text">Place Order</span>
                           <span className="btn-hover-text">

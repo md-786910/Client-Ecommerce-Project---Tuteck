@@ -23,7 +23,7 @@ export const cartApiSlice = createApi({
           body: data,
         };
       },
-      providesTags: ["cart"],
+      invalidatesTags: ["Cart"],
     }),
 
     getAllCart: builder.query({

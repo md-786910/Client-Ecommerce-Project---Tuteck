@@ -1,16 +1,64 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useGetAllProductQuery } from "../../../settings/services/productListing.service";
-import { showError } from "../../../../utils/errorHandling";
+import { showError, showSuccess } from "../../../../utils/errorHandling";
 import Loader from "../../../../utils/Loader";
 import { Link } from "react-router-dom";
 import { Col, Row } from "react-bootstrap";
+import BtnLoader from "../../../../utils/BtnLoader";
+import { useAddToCartMutation } from "../../../settings/services/cart.service";
 
 function ProductAdd(props) {
   const { title, name } = props;
   const { data, isLoading, isError, error } = useGetAllProductQuery(title);
-  if (isError) {
-    return showError(error);
+
+  // add to cart.
+  const [
+    creatingCart,
+    {
+      data: cartData,
+      isLoading: isCreating,
+      isSuccess,
+      isError: isCartError,
+      error: cartError,
+    },
+  ] = useAddToCartMutation();
+
+  const addToCart = (productId, prod) => {
+    console.log(prod);
+    const { name, image, price } = prod;
+    // const actPrice = pricing.split("$").filter(Boolean);
+
+    const data = {
+      productId,
+      name,
+      image: image,
+      description: "",
+      information: "",
+      price: parseInt(price),
+      qty: 1,
+    };
+    creatingCart(data);
+  };
+
+  if (isCartError) {
+    showError(cartError?.data?.message);
   }
+
+  if (isError) {
+    showError(error);
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      if (cartData?.message === "product already exist!") {
+        showSuccess(cartData?.message, "", "warning");
+      } else {
+        showSuccess(cartData?.message, "");
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
+
   return (
     <>
       <div className="container">
@@ -23,7 +71,7 @@ function ProductAdd(props) {
           </h2>
 
           <span className="text-success">
-            <Link to={`productCategory/${title}`}>view all</Link>
+            <Link to={`/productCategory/${title}`}>view all</Link>
           </span>
         </div>
       </div>
@@ -91,9 +139,17 @@ function ProductAdd(props) {
                               </div>
                             </div>
                             <div className="product-action">
-                              <a href="#1" className="btn-product btn-cart">
-                                <span>add to cart</span>
-                              </a>
+                              <buttom
+                                className="btn-product btn-cart"
+                                style={{ cursor: "pointer" }}
+                                onClick={() => addToCart(productId, prod)}
+                              >
+                                {isCreating ? (
+                                  <BtnLoader />
+                                ) : (
+                                  <span>add to cart</span>
+                                )}
+                              </buttom>
                             </div>
                           </div>
                         </Col>

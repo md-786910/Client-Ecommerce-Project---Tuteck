@@ -1,11 +1,11 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Order from "./Order";
 import BillingAdress from "./BillingAdress";
 import Landing from "./Landing";
-import Sidebar from "./Sidebar";
 import Dashboard from "./Dashboard";
 import ResetPassword from "./ResetPassword";
+import OrderProductListing from "./OrderProductListing";
 
 function Account() {
   return (
@@ -13,6 +13,7 @@ function Account() {
       <Landing />
       <Routes>
         <Route path="/" element={<Order />} />
+        <Route path="/order/:orderId" element={<OrderProductListing />} />
         <Route path="/address" element={<BillingAdress />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/resetPassword" element={<ResetPassword />} />

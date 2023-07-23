@@ -5,7 +5,7 @@ function Sidebar() {
   return (
     <>
       <aside
-        class="col-md-4 col-lg-3 mb-1"
+        class="col-md-3 col-lg-2 mb-1"
         style={{ background: "whitesmoke" }}
       >
         <ul class="nav nav-dashboard flex-column mb-3 mb-md-0">
