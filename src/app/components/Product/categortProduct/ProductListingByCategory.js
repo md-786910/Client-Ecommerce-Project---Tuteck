@@ -14,7 +14,7 @@ function ProductByCategory() {
               return (
                 <div class="col-6 col-sm-4 col-lg-2">
                   <Link
-                    to={`/productCategory/${[prod?.name]}`}
+                    to={`/productCategory/${prod?.name}`}
                     class="cat-block"
                   >
                     <figure>

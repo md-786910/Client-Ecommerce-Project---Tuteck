@@ -2,18 +2,18 @@ export const productCategory = [
   {
     id: 1,
     image: "/assets/images/demos/demo-4/cats/1.png",
-    name: "Computer & Laptop",
+    name: "Computer&Laptop",
   },
 
   {
     id: 2,
     image: "/assets/images/demos/demo-4/cats/2.png",
-    name: "Digital Cameras",
+    name: "DigitalCameras",
   },
   {
     id: 3,
     image: "/assets/images/demos/demo-4/cats/3.png",
-    name: "Smart Phones",
+    name: "SmartPhones",
   },
   {
     id: 4,
@@ -28,6 +28,6 @@ export const productCategory = [
   {
     id: 6,
     image: "/assets/images/demos/demo-4/cats/6.png",
-    name: "Smart Watches",
+    name: "SmartWatches",
   },
 ];

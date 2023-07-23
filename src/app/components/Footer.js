@@ -1,6 +1,7 @@
 import React from "react";
 import CTA from "./CTA";
 import PaymentCTA from "./PaymentCTA";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -13,46 +14,40 @@ function Footer() {
             <div className="row">
               <div className="col-sm-6 col-lg-3">
                 <div className="widget widget-about">
-                  <h4 className="widget-title">about molla</h4>
+                  <h4 className="widget-title">About Molla</h4>
                   <p>
-                    Praesent dapibus, neque id cursus ucibus, tortor neque
-                    egestas augue, eu vulputate magna eros eu erat.{" "}
+                    Welcome to Molla, your ultimate destination for all things fashion! We are more
+                    than just an eCommerce platform; we are a fashion-forward community where style
+                    knows no boundaries. Get ready to explore a world of trendsetting
+                    clothing and accessories for men, women, and kids that will elevate your fashion game to new heights.
                   </p>
 
                   <div className="social-icons">
                     <a
-                      href="#12"
+                      href="https://github.com/subhaDTECH"
                       className="social-icon"
-                      title="Facebook"
+                      title="Github"
                       target="_blank"
                     >
-                      <i className="icon-facebook-f"></i>
+                      <i className="icon-github"></i>
                     </a>
                     <a
-                      href="#"
+                      href=" https://github.com/md-786910/"
                       className="social-icon"
-                      title="Twitter"
+                      title="Github"
                       target="_blank"
                     >
-                      <i className="icon-twitter"></i>
+                      <i className="icon-github"></i>
                     </a>
                     <a
-                      href="#"
+                      href="https://github.com/Chirasree05/"
                       className="social-icon"
-                      title="Instagram"
+                      title="Github"
                       target="_blank"
                     >
-                      <i className="icon-instagram"></i>
+                      <i className="icon-github"></i>
                     </a>
-                    <a
-                      href="#"
-                      className="social-icon"
-                      title="Youtube"
-                      target="_blank"
-                    >
-                      <i className="icon-youtube"></i>
-                    </a>
-                  </div>
+                    </div>
                 </div>
               </div>
 
@@ -62,19 +57,19 @@ function Footer() {
 
                   <ul className="widget-list">
                     <li>
-                      <a href="about.html">About Molla</a>
+                      <Link to="/about">About Molla</Link>
                     </li>
                     <li>
-                      <a href="#">How to shop on Molla</a>
+                      <Link to="/">How to shop on Molla</Link>
                     </li>
                     <li>
                       <a href="#">FAQ</a>
                     </li>
                     <li>
-                      <a href="contact.html">Contact us</a>
+                      <Link to="/contact">Contact us</Link>
                     </li>
                     <li>
-                      <a href="login.html">Log in</a>
+                      <a href="/auth">Log in</a>
                     </li>
                   </ul>
                 </div>
@@ -113,19 +108,19 @@ function Footer() {
 
                   <ul className="widget-list">
                     <li>
-                      <a href="#">Sign In</a>
+                      <Link to="/auth">Sign In</Link>
                     </li>
                     <li>
-                      <a href="cart.html">View Cart</a>
+                      <Link to="/cart">View Cart</Link>
                     </li>
                     <li>
-                      <a href="#">My Wishlist</a>
+                      <Link to="/wishlist">My Wishlist</Link>
                     </li>
                     <li>
                       <a href="#">Track My Order</a>
                     </li>
                     <li>
-                      <a href="#">Help</a>
+                      <a href="/contact">Help</a>
                     </li>
                   </ul>
                 </div>

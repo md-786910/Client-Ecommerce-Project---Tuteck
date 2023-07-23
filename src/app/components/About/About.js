@@ -36,23 +36,20 @@ function About() {
               <div class="col-lg-6 mb-3 mb-lg-0">
                 <h2 class="title">Our Vision</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In
-                  nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Sed
-                  pretium, ligula sollicitudin laoreet viverra, tortor libero
-                  sodales leo, eget blandit nunc tortor eu nibh.{" "}
+                  At Molla, we believe that fashion is a reflection
+                  of individuality and style. We are your one-stop destination for trendy
+                  and stylish clothing for both men and women and Kids .{" "}
                 </p>
               </div>
 
               <div class="col-lg-6">
                 <h2 class="title">Our Mission</h2>
                 <p>
-                  Sed egestas, ante et vulputate volutpat, eros pede semper est,
-                  vitae luctus metus libero eu augue. Morbi purus libero,
-                  faucibus adipiscing, commodo quis, gravida id, est. Sed
-                  lectus. <br />
-                  Praesent elementum hendrerit tortor. Sed semper lorem at
-                  felis.{" "}
+                  Our mission is to empower our customers to express
+                  themselves through fashion, by offering a diverse range
+                  of clothing that caters to all tastes and preferences.
+                  We strive to provide the latest fashion trends and timeless
+                  classics,ensuring that everyone finds something they love.{" "}
                 </p>
               </div>
             </div>
@@ -66,14 +63,16 @@ function About() {
                 <div class="col-lg-5 mb-3 mb-lg-0">
                   <h2 class="title">Who We Are</h2>
                   <p class="lead text-primary mb-3">
-                    Pellentesque odio nisi, euismod pharetra a ultricies <br />
-                    in diam. Sed arcu. Cras consequat
+                    Welcome to Molla – where creativity knows no bounds! We are not just an ordinary eCommerce store;
+                    we are a vibrant and imaginative team on a mission to redefine shopping for men, women, and kids.
+                    Get ready to embark on a thrilling journey of fashion, style, and self-expression like never before.
                   </p>
                   <p class="mb-2">
-                    Sed pretium, ligula sollicitudin laoreet viverra, tortor
-                    libero sodales leo, eget blandit nunc tortor eu nibh.
-                    Suspendisse potenti. Sed egestas, ante et vulputate
-                    volutpat, uctus metus libero eu augue.{" "}
+                    Step into a realm of endless possibilities, as we curate a handpicked
+                    selection of extraordinary clothing and accessories that celebrate diversity
+                    and individuality.Our mission is to unleash the power of imagination through
+                    fashion and bring you a collection that sparks inspiration and ignites your
+                    passion for self-expression.{" "}
                   </p>
 
                   <a
@@ -111,8 +110,11 @@ function About() {
                     The world's premium design brands in one destination.
                   </h2>
                   <p>
-                    Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In
-                    nisi neque, aliquet vel, dapibus id, mattis vel, nis
+                    Molla is not just a store; it's a playground of style 
+                    possibilities.Whether you're stepping into a corporate 
+                    boardroom, dancing under city lights, or making magical 
+                    childhood memories, we have the perfect ensemble to accompany 
+                    you on your journey.
                   </p>
                 </div>
               </div>
@@ -213,22 +215,21 @@ function About() {
                 <div class="member member-anim text-center">
                   <figure class="member-media">
                     <img
-                      src="assets/images/team/member-1.jpg"
+                      src="assets/images/team/member-4.jpeg"
                       alt="member photo"
                     />
 
                     <figcaption class="member-overlay">
                       <div class="member-overlay-content">
                         <h3 class="member-title">
-                          Samanta Grey<span>Founder & CEO</span>
+                          SUVA DULEY<span>Founder & CEO</span>
                         </h3>
                         <p>
-                          Sed pretium, ligula sollicitudin viverra, tortor
-                          libero sodales leo, eget blandit nunc.
+                          Full stack developer & Open source Contributor
                         </p>
                         <div class="social-icons social-icons-simple">
                           <a
-                            href="#"
+                            href="https://m.facebook.com/profile.php?eav=AfYzDtGDSr751YOPZ7qfq6DUOUK2T9MSZXbfg8294eDSx9NMrOSYeagw2VJtFCCfQl8&paipv=0"
                             class="social-icon"
                             title="Facebook"
                             target="_blank"
@@ -236,7 +237,7 @@ function About() {
                             <i class="icon-facebook-f"></i>
                           </a>
                           <a
-                            href="#"
+                            href="https://twitter.com/DuleySuva"
                             class="social-icon"
                             title="Twitter"
                             target="_blank"
@@ -244,7 +245,7 @@ function About() {
                             <i class="icon-twitter"></i>
                           </a>
                           <a
-                            href="#"
+                            href="https://www.instagram.com/subha000111/"
                             class="social-icon"
                             title="Instagram"
                             target="_blank"
@@ -257,7 +258,7 @@ function About() {
                   </figure>
                   <div class="member-content">
                     <h3 class="member-title">
-                      Samanta Grey<span>Founder & CEO</span>
+                      @SUVA DULEY<span>Founder & CEO1</span>
                     </h3>
                   </div>
                 </div>
@@ -267,18 +268,18 @@ function About() {
                 <div class="member member-anim text-center">
                   <figure class="member-media">
                     <img
-                      src="assets/images/team/member-2.jpg"
+                      height={200}
+                      src="assets/images/team/member-7.jpeg"
                       alt="member photo"
                     />
 
                     <figcaption class="member-overlay">
                       <div class="member-overlay-content">
                         <h3 class="member-title">
-                          Bruce Sutton<span>Sales & Marketing Manager</span>
+                          MD ASHIF<span>Founder & CEO2</span>
                         </h3>
                         <p>
-                          Sed pretium, ligula sollicitudin viverra, tortor
-                          libero sodales leo, eget blandit nunc.
+                         Full Stack developer & Problem solver
                         </p>
                         <div class="social-icons social-icons-simple">
                           <a
@@ -311,7 +312,7 @@ function About() {
                   </figure>
                   <div class="member-content">
                     <h3 class="member-title">
-                      Bruce Sutton<span>Sales & Marketing Manager</span>
+                    @MD ASHIF<span>Founder & CEO3</span>
                     </h3>
                   </div>
                 </div>
@@ -321,22 +322,24 @@ function About() {
                 <div class="member member-anim text-center">
                   <figure class="member-media">
                     <img
-                      src="assets/images/team/member-3.jpg"
+                      src="assets/images/team/member-8.jpeg"
                       alt="member photo"
                     />
 
                     <figcaption class="member-overlay">
                       <div class="member-overlay-content">
                         <h3 class="member-title">
-                          Janet Joy<span>Product Manager</span>
+                        Chirasree<span>Product Manager</span>
                         </h3>
                         <p>
-                          Sed pretium, ligula sollicitudin viverra, tortor
-                          libero sodales leo, eget blandit nunc.
+                          Molla is not just a store; it's a playground of style possibilities.
+                          Whether you're stepping into a corporate boardroom, dancing under city
+                          lights, or making magical childhood memories, we have the perfect ensemble
+                          to accompany you on your journey.
                         </p>
                         <div class="social-icons social-icons-simple">
                           <a
-                            href="#"
+                            href="https://www.facebook.com/chirasree.sur?mibextid=ZbWKwL"
                             class="social-icon"
                             title="Facebook"
                             target="_blank"
@@ -365,7 +368,7 @@ function About() {
                   </figure>
                   <div class="member-content">
                     <h3 class="member-title">
-                      Janet Joy<span>Product Manager</span>
+                    Chirasree<span>Founder & CEO3</span>
                     </h3>
                   </div>
                 </div>
@@ -397,15 +400,13 @@ function About() {
                 <blockquote class="testimonial text-center">
                   <img src="assets/images/testimonials/user-1.jpg" alt="user" />
                   <p>
-                    “ Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                    Pellentesque aliquet nibh nec urna. <br />
-                    In nisi neque, aliquet vel, dapibus id, mattis vel, nisi.
-                    Sed pretium, ligula sollicitudin laoreet viverra, tortor
-                    libero sodales leo, eget blandit nunc tortor eu nibh. Nullam
-                    mollis. Ut justo. Suspendisse potenti. ”
+                    "Wow! I can't express how thrilled I am with my recent purchase from Molla.
+                    The dress I bought was exactly as described, and the fit is just perfect.
+                    I received so many compliments at the party, and I felt like a fashion diva.
+                    Thank you, Molla, for making me feel so confident and stylish!" - Sarah L.
                   </p>
                   <cite>
-                    Jenson Gregory
+                    Sarah L
                     <span>Customer</span>
                   </cite>
                 </blockquote>
@@ -413,15 +414,14 @@ function About() {
                 <blockquote class="testimonial text-center">
                   <img src="assets/images/testimonials/user-2.jpg" alt="user" />
                   <p>
-                    “ Impedit, ratione sequi, sunt incidunt magnam et. Delectus
-                    obcaecati optio eius error libero perferendis nesciunt atque
-                    dolores magni recusandae! Doloremque quidem error eum quis
-                    similique doloribus natus qui ut ipsum.Velit quos ipsa
-                    exercitationem, vel unde obcaecati impedit eveniet non. ”
+                    "Finally, an eCommerce platform that gets it right! I love Molla's commitment to inclusivity and diversity in their fashion collection.
+                    As a plus-size woman, it's often hard to find stylish and trendy clothing that fits well.
+                    But Molla has a fantastic range of options that flatter my curves beautifully.
+                    I'm officially hooked!" - Emma R.
                   </p>
 
                   <cite>
-                    Victoria Ventura
+                    Emma R
                     <span>Customer</span>
                   </cite>
                 </blockquote>
