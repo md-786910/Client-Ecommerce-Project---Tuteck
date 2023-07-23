@@ -17,16 +17,19 @@ function AuthModel(props) {
   const { show, handleClose } = props;
 
   // for forgot password model
-  // const [open, setOpen] = useState(false);
+  //my change start
+  const [open, setOpen] = useState(false);
 
-  // const handleOpen = () => {
-  //   setOpen(true);
-  //   handleClose();
-  // };
+  const handleOpen = () => {
+    setOpen(true);
+    handleClose();
+  };
 
-  // const handleCloseModel = () => {
-  //   setOpen(false);
-  // };
+  const handleCloseModel = () => {
+    setOpen(false);
+  };
+
+  //mychange end 
 
   const [
     registerUser,
@@ -207,8 +210,10 @@ function AuthModel(props) {
                   </div>
 
                   <a
-                    href="#"
-                    // onClick={() => handleOpen()}
+                    type="button"
+                    // href="#"
+                    // my chnage 
+                    onClick={() => handleOpen()}
                     className="forgot-link"
                   >
                     Forgot Your Password?
@@ -334,8 +339,8 @@ function AuthModel(props) {
           </div>
         </div>
       </div>
-
-      {/* <ForgotPasswordModel show={open} handleClose={handleCloseModel} />
+ {/* my change start  */}
+      <ForgotPasswordModel show={open} handleClose={handleCloseModel} />
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>
           <button type="button" className="close" onClick={handleClose}>
@@ -346,7 +351,9 @@ function AuthModel(props) {
 
         
         </Modal.Body>
-      </Modal> */}
+      </Modal>
+
+      {/* my change end  */}
     </>
   );
 }

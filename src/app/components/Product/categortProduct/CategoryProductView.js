@@ -7,6 +7,7 @@ import { showError } from "../../../../utils/errorHandling";
 function CategoryProductAll() {
   const { category } = useParams();
   const { data, isLoading, isError } = useGetAllProductQuery(category);
+  console.log(data,"-<data->")
 
   if (isError) {
     return showError("something error wrong!");

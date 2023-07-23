@@ -36,9 +36,8 @@ function Contact() {
               <div class="col-lg-6 mb-2 mb-lg-0">
                 <h2 class="title mb-1">Contact Information</h2>
                 <p class="mb-3">
-                  Vestibulum volutpat, lacus a ultrices sagittis, mi neque
-                  euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus
-                  pede arcu, dapibus eu, fermentum et, dapibus sed, urna.
+                 Empowering Business with smart & data-driven decision making ·
+                 Data Services. We help enterprises unlock the potential of the their data.
                 </p>
                 <div class="row">
                   <div class="col-sm-7">
@@ -48,12 +47,11 @@ function Contact() {
                       <ul class="contact-list">
                         <li>
                           <i class="icon-map-marker"></i>
-                          70 Washington Square South New York, NY 10012, United
-                          States
+                          3B Block 2, Star Residency, 22 Uttarpurba, Fartabad, Garia, West Bengal 700084
                         </li>
                         <li>
                           <i class="icon-phone"></i>
-                          <a href="tel:#">+92 423 567</a>
+                          <a href="tel:#">+44 76 0303 3651</a>
                         </li>
                         <li>
                           <i class="icon-envelope"></i>
