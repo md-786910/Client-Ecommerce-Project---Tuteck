@@ -15,18 +15,6 @@ function AuthModel(props) {
 
   // for forgot password model
   const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-    const handleClose = () => {
-    setopen(false);
-  };
-
- 
-
-
-
   const [
     registerUser,
     { isLoading: isRegistering, isSuccess, isError, error },
