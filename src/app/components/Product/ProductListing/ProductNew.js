@@ -86,7 +86,7 @@ function ProductNew() {
                   to={`/productCategory/${"GoPro - Fusion 360"}`}
                   class="banner-link"
                 >
-                  Shop Now<i class="icon-long-arrow-right"></i>
+                  Shop Now . Hurry!<i class="icon-long-arrow-right"></i>
                 </Link>
               </div>
             </div>

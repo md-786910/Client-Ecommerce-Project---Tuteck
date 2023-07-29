@@ -15,9 +15,9 @@ function HomePage() {
       <ProductAdd title="Tshirt,shirt,jeans" name="Mens Wear" />
       <ProductAdd title="Women cloth" name="Womens Wear" />
 
-      {/*
+      
      
-      <Model />
+      {/* <Model />
       <TopSellingProduct /> */}
       <DealOfDay />
     </>

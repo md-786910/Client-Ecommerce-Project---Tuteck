@@ -12,7 +12,20 @@ import ForgotPasswordModel from "./ForgotPasswordModel";
 
 function AuthModel(props) {
   const [showError, showSuccess, userAlert] = useErrorHandler();
-  const [open, setopen] = useState(false);
+
+  // for forgot password model
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+    const handleClose = () => {
+    setopen(false);
+  };
+
+ 
+
+
 
   const [
     registerUser,
@@ -205,8 +218,13 @@ function AuthModel(props) {
                   </div>
 
                   <a
+
                     href="#"
                     onClick={() => handeOpen()}
+
+             
+                    // href="#"
+
                     className="forgot-link"
                   >
                     Forgot Your Password?
@@ -332,8 +350,8 @@ function AuthModel(props) {
           </div>
         </div>
       </div>
-
-      {/* <ForgotPasswordModel show={open} handleClose={handleCloseModel} />
+ {/* my change start  */}
+      <ForgotPasswordModel show={open} handleClose={handleCloseModel} />
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Body>
           <button type="button" className="close" onClick={handleClose}>
@@ -344,7 +362,9 @@ function AuthModel(props) {
 
         
         </Modal.Body>
-      </Modal> */}
+      </Modal>
+
+      {/* my change end  */}
     </>
   );
 }
