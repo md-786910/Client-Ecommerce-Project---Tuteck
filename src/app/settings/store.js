@@ -5,6 +5,7 @@ import { rootReducer } from "./rooReducer";
 import { authApiSlice } from "./services/auth.service";
 import { cartApiSlice } from "./services/cart.service";
 import { orderApiSlice } from "./services/order.service";
+import { addressApiSlice } from "./services/address.service";
 
 export const store = configureStore({
   reducer: rootReducer,
@@ -17,6 +18,7 @@ export const store = configureStore({
       productListingApiSlice.middleware,
       authApiSlice.middleware,
       cartApiSlice.middleware,
-      orderApiSlice.middleware
+      orderApiSlice.middleware,
+      addressApiSlice.middleware
     ),
 });

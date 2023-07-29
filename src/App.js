@@ -19,6 +19,7 @@ import { useCallback } from "react";
 import { isAutheticated } from "./app/components/utils/authHelper";
 import AuthModel from "./app/components/Auth/AuthModel";
 import ProductAdd from "./app/components/Product/ProductListing/ProductAdd";
+import OrderSuccess from "./app/components/Account/OrderSuccess";
 
 function App() {
   const { token } = isAutheticated();
@@ -62,6 +63,7 @@ function App() {
         <Route exact path="/" element={<Protected />}>
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="confirm" element={<OrderSuccess />} />
         </Route>
 
         <Route path="/wishlist" element={<WhislistPage />} />

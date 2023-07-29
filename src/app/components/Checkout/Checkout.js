@@ -1,18 +1,24 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import {
-  useAddAddressMutation,
+  useGetAllOrdersQuery,
   useGetOrderByIdQuery,
 } from "../../settings/services/order.service";
-import { showError } from "../../../utils/errorHandling";
+import { showError, showSuccess } from "../../../utils/errorHandling";
 import Loader from "../../../utils/Loader";
 import { paymentHandler } from "./paymentApi";
 import { useState } from "react";
 import BtnLoader from "../../../utils/BtnLoader";
+import {
+  useCreateAddressMutation,
+  useGetAddressQuery,
+} from "../../settings/services/address.service";
+import { useEffect } from "react";
 
 function Checkout() {
   const location = useLocation();
   const orderId = location.search.slice(9);
+
   const [address, setAddress] = useState({
     firstName: "",
     lastName: "",
@@ -24,8 +30,27 @@ function Checkout() {
     country: "",
     streetAddress: "",
   });
+
   const { data, isSuccess, isLoading, isError, error } =
     useGetOrderByIdQuery(orderId);
+
+  // address
+
+  const {
+    data: addressData,
+    isSuccess: addressSuccess,
+    isError: getAddressError,
+  } = useGetAddressQuery();
+
+  const [
+    createAddress,
+    {
+      isSuccess: isAddressSuccess,
+      isLoading: isAddressing,
+      isError: isAddressError,
+      error: addressError,
+    },
+  ] = useCreateAddressMutation();
 
   // handle change
   const handleChange = (e) => {
@@ -59,15 +84,34 @@ function Checkout() {
       !streetAddress ||
       !postalCode
     ) {
-      showError("All fields are required", "");
+      showError("All fields are required");
     } else {
       // mutate
+      createAddress(address);
     }
   };
 
-  if (isError) {
-    showError(error?.data?.message, "");
+  if (isAddressError) {
+    showError(error?.data?.message || error?.message);
   }
+  if (isError) {
+    showError(addressError?.data?.message || addressError?.message);
+  }
+  // if (getAddressError) {
+  //   showError("Address error");
+  // }
+
+  useEffect(() => {
+    if (isAddressSuccess) {
+      showSuccess("successfully updated! ");
+    }
+  }, [isAddressSuccess]);
+  useEffect(() => {
+    if (addressSuccess) {
+      setAddress(addressData?.data);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [addressSuccess]);
 
   return (
     <>
@@ -214,6 +258,16 @@ function Checkout() {
                         onChange={(e) => handleChange(e)}
                         required
                       />
+
+                      <div className=" updateAddress">
+                        <button
+                          className="btn btn-success"
+                          disabled={isAddressing}
+                          onClick={() => handleBillingAdress()}
+                        >
+                          {isAddressing ? <BtnLoader /> : "Update Address"}
+                        </button>
+                      </div>
                     </div>
                     <aside className="col-lg-3">
                       <div className="summary">
@@ -262,7 +316,15 @@ function Checkout() {
 
                         <button
                           className="btn btn-outline-primary-2 btn-order btn-block"
-                          onClick={() => paymentHandler(address, orderId)}
+                          onClick={() => {
+                            if (address.email && address.phone) {
+                              paymentHandler(orderId);
+                            } else {
+                              showError(
+                                "Please fill the address before checkout!"
+                              );
+                            }
+                          }}
                         >
                           <span className="btn-text">Place Order</span>
                           <span className="btn-hover-text">
