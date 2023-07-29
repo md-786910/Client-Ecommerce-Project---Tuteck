@@ -10,7 +10,7 @@ function Header() {
   const { token } = isAutheticated();
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const data = token ? useGetAllCartQuery() : 0;
+  const data = token && useGetAllCartQuery();
 
   const product = useSelector((state) => state.whislist.product);
 
@@ -102,7 +102,7 @@ function Header() {
                     <div className="icon">
                       <i className="icon-shopping-cart"></i>
                       <span className="cart-count">
-                        {data.data?.cart?.length || 0}
+                        {token && (data.data?.cart?.length || 0)}
                       </span>
                     </div>
                     <p>Cart</p>

@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
 import { Modal } from "react-bootstrap";
-import { useForgotPasswordUserMutation } from "../../settings/services/auth.service";
 import { showError, showSuccess } from "../../../utils/errorHandling";
 import BtnLoader from "../../../utils/BtnLoader";
+import { useForgotPasswordUserMutation } from "../../settings/services/order.service";
 
 function ForgotPasswordModel(props) {
-  const { show, handleClose } = props;
+  const { open, handleClose } = props;
 
   const [
     forgotPasswordUser,
@@ -39,7 +39,7 @@ function ForgotPasswordModel(props) {
 
   return (
     <>
-      <Modal show={show} onHide={handleClose} centered>
+      <Modal show={open} onHide={handleClose} centered>
         <Modal.Body>
           <button type="button" className="close" onClick={handleClose}>
             <span aria-hidden="true">

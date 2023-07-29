@@ -1,32 +1,18 @@
 import React, { useRef } from "react";
-import { Modal } from "react-bootstrap";
 import {
   useLoginUserMutation,
   useRegisterUserMutation,
 } from "../../settings/services/auth.service";
-import {
-  showApiError,
-  showError,
-  showSuccess,
-} from "../../../utils/errorHandling";
+
 import BtnLoader from "../../../utils/BtnLoader";
-import ForgotPasswordModel from "./ForgotPasswordModel";
+import { useErrorHandler } from "../../../utils/useErrorHandler";
+import { useEffect } from "react";
 import { useState } from "react";
+import ForgotPasswordModel from "./ForgotPasswordModel";
 
 function AuthModel(props) {
-  const { show, handleClose } = props;
-
-  // for forgot password model
-  // const [open, setOpen] = useState(false);
-
-  // const handleOpen = () => {
-  //   setOpen(true);
-  //   handleClose();
-  // };
-
-  // const handleCloseModel = () => {
-  //   setOpen(false);
-  // };
+  const [showError, showSuccess, userAlert] = useErrorHandler();
+  const [open, setopen] = useState(false);
 
   const [
     registerUser,
@@ -54,6 +40,14 @@ function AuthModel(props) {
   const loginPaswordRef = useRef("");
   const confirmPasswordRef = useRef("");
 
+  // forgot password
+  const handeOpen = () => {
+    setopen(true);
+  };
+  const handleClose = () => {
+    setopen(false);
+  };
+
   const HandleRegistration = async (e) => {
     e.preventDefault();
     try {
@@ -68,15 +62,9 @@ function AuthModel(props) {
         registerUser({ name, email, password, confirm_password });
       }
     } catch (error) {
-      showError("Registration failed", "");
+      showError(error?.response?.data?.message || error?.message, "");
     }
   };
-  if (isError) {
-    showApiError(error, "Registration failed");
-  }
-  if (isSuccess) {
-    showSuccess("User Registration Successfully", "");
-  }
 
   // Login
   const HandleLogin = async (e) => {
@@ -86,17 +74,14 @@ function AuthModel(props) {
 
     try {
       if (!email || !password) {
-        showError("All fields are required", "fill fields properly");
+        showError("All fields are required");
       } else {
         loginUser({ email, password });
       }
     } catch (error) {
-      showApiError(error, "Login failed");
+      showError(error?.response?.data?.message || error?.message);
     }
   };
-  if (isLoginError) {
-    showError(loginError?.data?.message, "Login failed");
-  }
 
   if (isLoginSucc) {
     if (isLoginSucc) {
@@ -111,12 +96,27 @@ function AuthModel(props) {
       setTimeout(() => {
         window.location.reload();
       }, 100);
-      showSuccess("User login  successfully", "success");
+      userAlert("User login  successfully");
     }
+  }
+
+  useEffect(() => {
+    if (isSuccess) {
+      userAlert("user registered successfully ");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccess]);
+
+  if (isError) {
+    showError(error?.data?.message || error?.message);
+  }
+  if (isLoginError) {
+    showError(loginError?.data?.message);
   }
 
   return (
     <>
+      <ForgotPasswordModel open={open} handleClose={handleClose} />
       <div className="form-box mt-4 shadow">
         <div className="form-tab">
           <ul className="nav nav-pills nav-fill" role="tablist">
@@ -206,7 +206,7 @@ function AuthModel(props) {
 
                   <a
                     href="#"
-                    // onClick={() => handleOpen()}
+                    onClick={() => handeOpen()}
                     className="forgot-link"
                   >
                     Forgot Your Password?

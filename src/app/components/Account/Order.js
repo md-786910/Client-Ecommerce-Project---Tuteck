@@ -8,6 +8,7 @@ import {
 } from "../../settings/services/order.service";
 import Loader from "../../../utils/Loader";
 import { formatDate } from "../utils/formateDate";
+import { paymentHandler } from "../Checkout/paymentApi";
 
 function Order() {
   // rtq query
@@ -69,8 +70,13 @@ function Order() {
                               </span>
                             </td>
                             <td className="action-col">
-                              <button className="btn-remove">
-                                {formatDate(prod?.createdAt)}
+                              <button
+                                className="btn btn-success"
+                                onClick={() => paymentHandler(prod?.orderId)}
+                              >
+                                {prod?.status === "PENDING"
+                                  ? "Pay Now"
+                                  : "PAID"}
                               </button>
                             </td>
                           </tr>

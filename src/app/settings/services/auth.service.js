@@ -31,28 +31,7 @@ export const authApiSlice = createApi({
       }),
       providesTags: ["userAuth"],
     }),
-    resetPasswordUser: builder.mutation({
-      query: ({ ...data }) => ({
-        url: "/user/resetPassword",
-        method: "POST",
-        body: data,
-      }),
-      providesTags: ["userAuth"],
-    }),
-    forgotPasswordUser: builder.mutation({
-      query: ({ ...data }) => ({
-        url: "/user/forgotPassword",
-        method: "POST",
-        body: data,
-      }),
-      providesTags: ["userAuth"],
-    }),
   }),
 });
 
-export const {
-  useRegisterUserMutation,
-  useForgotPasswordUserMutation,
-  useLoginUserMutation,
-  useResetPasswordUserMutation,
-} = authApiSlice;
+export const { useRegisterUserMutation, useLoginUserMutation } = authApiSlice;

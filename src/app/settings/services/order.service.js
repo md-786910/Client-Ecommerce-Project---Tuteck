@@ -22,7 +22,7 @@ export const orderApiSlice = createApi({
           body: data,
         };
       },
-      providesTags: ["Order"],
+      invalidatesTags: ["Order"],
     }),
 
     getAllOrders: builder.query({
@@ -44,6 +44,23 @@ export const orderApiSlice = createApi({
       },
       invalidatesTags: ["Order"],
     }),
+
+    resetPasswordUser: builder.mutation({
+      query: ({ ...data }) => ({
+        url: "/user/resetPassword",
+        method: "POST",
+        body: data,
+      }),
+      providesTags: ["userAuth"],
+    }),
+    forgotPasswordUser: builder.mutation({
+      query: ({ ...data }) => ({
+        url: "/user/forgotPassword",
+        method: "POST",
+        body: data,
+      }),
+      providesTags: ["userAuth"],
+    }),
   }),
 });
 
@@ -53,4 +70,6 @@ export const {
   useGetOrderByIdQuery,
   useAddAddressMutation,
   useDeleteOrderByIdMutation,
+  useForgotPasswordUserMutation,
+  useResetPasswordUserMutation,
 } = orderApiSlice;

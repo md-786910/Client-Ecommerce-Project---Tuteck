@@ -6,6 +6,7 @@ import { showError } from "../../../utils/errorHandling";
 import Loader from "../../../utils/Loader";
 import Sidebar from "./Sidebar";
 import { formatDate } from "../utils/formateDate";
+import { paymentHandler } from "../Checkout/paymentApi";
 
 function OrderProductListing() {
   const { orderId } = useParams();
@@ -157,24 +158,33 @@ function OrderProductListing() {
                     </div>
                   </div>
 
+                  <Link to={`/confirm?orderId=${orderId}`} k>
+                    <div className="btn w-100">
+                      <button className="btn btn-success btn-block">
+                        Track Order
+                      </button>
+                    </div>
+                  </Link>
+
                   <div class="card card-dashboard">
                     <div class="card-body">
                       <h3 class="card-title">Billing Address</h3>
                       <p>
-                        User Name
+                        {data?.order?.address?.firstName +
+                          " " +
+                          data?.order?.address?.lastName}
                         <br />
-                        User Company
+                        {data?.order?.address?.email}
                         <br />
-                        John str
+                        {data?.order?.address?.country} &nbsp;
+                        {data?.order?.address?.state} &nbsp;
+                        {data?.order?.address?.city} &nbsp;
+                        {data?.order?.address?.postalCode} &nbsp;
+                        {data?.order?.address?.streetAddress} &nbsp;
                         <br />
-                        New York, NY 10001
+                        {data?.order?.phone}
                         <br />
-                        1-234-987-6543
-                        <br />
-                        yourmail@mail.com
-                        <br />
-                        <br />
-                        +91454564644
+                        +91 {data?.order?.contact}
                         <br />
                       </p>
                     </div>
@@ -202,6 +212,18 @@ function OrderProductListing() {
                               <h6>razorpay_payment_id</h6>
                               <h6>{data?.order?.razorpay_payment_id}</h6>
                             </div>
+                            <div className="mt-1 d-flex justify-content-between align-items-center">
+                              <h6>order_id</h6>
+                              <h6>{data?.order?.order_id}</h6>
+                            </div>
+                            <div className="mt-1 d-flex justify-content-between align-items-center">
+                              <h6>upi_transaction_id</h6>
+                              <h6>{data?.order?.upi_transaction_id}</h6>
+                            </div>
+                            <div className="mt-1 d-flex justify-content-between align-items-center">
+                              <h6>method</h6>
+                              <h6>{data?.order?.method}</h6>
+                            </div>
                           </>
                         )}
                         {data?.order?.status === "SHIPPING" && (
@@ -222,11 +244,22 @@ function OrderProductListing() {
                           className={
                             data?.order?.status === "PENDING"
                               ? "btn btn-danger"
-                              : "btn btn-Success"
+                              : "btn btn-success"
                           }
                         >
                           {data?.order?.status}
                         </button>
+
+                        {data?.order?.status === "PAID" ? (
+                          ""
+                        ) : (
+                          <button
+                            className={"btn btn-success"}
+                            onClick={() => paymentHandler(orderId)}
+                          >
+                            Pay Now
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
