@@ -73,10 +73,13 @@ function Order() {
                               <button
                                 className="btn btn-success"
                                 onClick={() => paymentHandler(prod?.orderId)}
+                                disabled={
+                                  prod?.status === "PENDING" ? false : true
+                                }
                               >
                                 {prod?.status === "PENDING"
                                   ? "Pay Now"
-                                  : "PAID"}
+                                  : formatDate(prod?.createdAt)}
                               </button>
                             </td>
                           </tr>

@@ -23,7 +23,7 @@ function CartHeaderModel(props) {
       setTotal(totalPrice);
     }
     // eslint-disable-next-line
-  }, [isSuccess]);
+  });
 
   return (
     <>

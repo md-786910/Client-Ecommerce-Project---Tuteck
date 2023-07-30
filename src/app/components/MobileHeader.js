@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { handleLogout } from "./utils/authHelper";
 
 function MobileHeader() {
   return (
@@ -31,225 +33,40 @@ function MobileHeader() {
           <nav class="mobile-nav">
             <ul class="mobile-menu">
               <li class="active">
-                <a href="index.html">Home</a>
-
-                <ul>
-                  <li>
-                    <a href="index-1.html">01 - furniture store</a>
-                  </li>
-                </ul>
+                <Link to="/">Home</Link>
               </li>
               <li>
-                <a href="category.html">Shop</a>
-                <ul>
-                  <li>
-                    <a href="category-list.html">Shop List</a>
-                  </li>
-                  <li>
-                    <a href="category-2cols.html">Shop Grid 2 Columns</a>
-                  </li>
-                  <li>
-                    <a href="category.html">Shop Grid 3 Columns</a>
-                  </li>
-                  <li>
-                    <a href="category-4cols.html">Shop Grid 4 Columns</a>
-                  </li>
-                  <li>
-                    <a href="category-boxed.html">
-                      <span>
-                        Shop Boxed No Sidebar
-                        <span class="tip tip-hot">Hot</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="category-fullwidth.html">
-                      Shop Fullwidth No Sidebar
-                    </a>
-                  </li>
-                  <li>
-                    <a href="product-category-boxed.html">
-                      Product Category Boxed
-                    </a>
-                  </li>
-                  <li>
-                    <a href="product-category-fullwidth.html">
-                      <span>
-                        Product Category Fullwidth
-                        <span class="tip tip-new">New</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="cart.html">Cart</a>
-                  </li>
-                  <li>
-                    <a href="checkout.html">Checkout</a>
-                  </li>
-                  <li>
-                    <a href="wishlist.html">Wishlist</a>
-                  </li>
-                  <li>
-                    <a href="#">Lookbook</a>
-                  </li>
-                </ul>
+                <Link to="/shopping">Shop</Link>
               </li>
               <li>
-                <a href="product.html" class="sf-with-ul">
+                <a href="=#1" class="sf-with-ul">
                   Product
                 </a>
                 <ul>
                   <li>
-                    <a href="product.html">Default</a>
+                    <Link to="/productCategory/mens">Mens</Link>
                   </li>
                   <li>
-                    <a href="product-centered.html">Centered</a>
-                  </li>
-                  <li>
-                    <a href="product-extended.html">
-                      <span>
-                        Extended Info<span class="tip tip-new">New</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="product-gallery.html">Gallery</a>
-                  </li>
-                  <li>
-                    <a href="product-sticky.html">Sticky Info</a>
-                  </li>
-                  <li>
-                    <a href="product-sidebar.html">Boxed With Sidebar</a>
-                  </li>
-                  <li>
-                    <a href="product-fullwidth.html">Full Width</a>
-                  </li>
-                  <li>
-                    <a href="product-masonry.html">Masonry Sticky Info</a>
+                    <Link to="/productCategory/womens">Womens</Link>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="#">Pages</a>
-                <ul>
-                  <li>
-                    <a href="about.html">About</a>
+                <li>
+                  <Link to="/about">About Us</Link>
+                </li>
+                <li>
+                  <Link to="/contact">Contact</Link>
+                </li>
+              </li>
 
-                    <ul>
-                      <li>
-                        <a href="about.html">About 01</a>
-                      </li>
-                      <li>
-                        <a href="about-2.html">About 02</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="contact.html">Contact</a>
-
-                    <ul>
-                      <li>
-                        <a href="contact.html">Contact 01</a>
-                      </li>
-                      <li>
-                        <a href="contact-2.html">Contact 02</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="login.html">Login</a>
-                  </li>
-                  <li>
-                    <a href="faq.html">FAQs</a>
-                  </li>
-                  <li>
-                    <a href="404.html">Error 404</a>
-                  </li>
-                  <li>
-                    <a href="coming-soon.html">Coming Soon</a>
-                  </li>
-                </ul>
+              <li>
+                <Link to="/accounts">Accounts</Link>
               </li>
               <li>
-                <a href="blog.html">Blog</a>
-
-                <ul>
-                  <li>
-                    <a href="blog.html">Classic</a>
-                  </li>
-                  <li>
-                    <a href="blog-listing.html">Listing</a>
-                  </li>
-                  <li>
-                    <a href="#">Grid</a>
-                    <ul>
-                      <li>
-                        <a href="blog-grid-2cols.html">Grid 2 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-grid-3cols.html">Grid 3 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-grid-4cols.html">Grid 4 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-grid-sidebar.html">Grid sidebar</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#">Masonry</a>
-                    <ul>
-                      <li>
-                        <a href="blog-masonry-2cols.html">Masonry 2 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-masonry-3cols.html">Masonry 3 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-masonry-4cols.html">Masonry 4 columns</a>
-                      </li>
-                      <li>
-                        <a href="blog-masonry-sidebar.html">Masonry sidebar</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#">Mask</a>
-                    <ul>
-                      <li>
-                        <a href="blog-mask-grid.html">Blog mask grid</a>
-                      </li>
-                      <li>
-                        <a href="blog-mask-masonry.html">Blog mask masonry</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li>
-                    <a href="#">Single Post</a>
-                    <ul>
-                      <li>
-                        <a href="single.html">Default with sidebar</a>
-                      </li>
-                      <li>
-                        <a href="single-fullwidth.html">Fullwidth no sidebar</a>
-                      </li>
-                      <li>
-                        <a href="single-fullwidth-sidebar.html">
-                          Fullwidth with sidebar
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="elements-list.html">Elements</a>
-                <ul>
-                  <li>
-                    <a href="elements-products.html">Products</a>
-                  </li>
-                </ul>
+                <a href="#1" onClick={() => handleLogout()}>
+                  Logout
+                </a>
               </li>
             </ul>
           </nav>

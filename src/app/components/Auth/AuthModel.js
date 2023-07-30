@@ -96,7 +96,7 @@ function AuthModel(props) {
       setTimeout(() => {
         window.location.reload();
       }, 100);
-      userAlert("User login  successfully");
+      userAlert("User login successfully");
     }
   }
 
