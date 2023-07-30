@@ -259,15 +259,19 @@ function Checkout() {
                         required
                       />
 
-                      <div className=" updateAddress">
-                        <button
-                          className="btn btn-success"
-                          disabled={isAddressing}
-                          onClick={() => handleBillingAdress()}
-                        >
-                          {isAddressing ? <BtnLoader /> : "Update Address"}
-                        </button>
-                      </div>
+                      {data?.order?.status !== "PENDING" ? (
+                        ""
+                      ) : (
+                        <div className=" updateAddress">
+                          <button
+                            className="btn btn-success"
+                            disabled={isAddressing}
+                            onClick={() => handleBillingAdress()}
+                          >
+                            {isAddressing ? <BtnLoader /> : "Update Address"}
+                          </button>
+                        </div>
+                      )}
                     </div>
                     <aside className="col-lg-3">
                       <div className="summary">
@@ -325,11 +329,18 @@ function Checkout() {
                               );
                             }
                           }}
+                          disabled={
+                            data?.order?.status === "PAID" ? true : false
+                          }
                         >
                           <span className="btn-text">Place Order</span>
-                          <span className="btn-hover-text">
-                            Proceed to Checkout
-                          </span>
+                          {data?.order?.status !== "PENDING" ? (
+                            <span className="btn-hover-text">PAID</span>
+                          ) : (
+                            <span className="btn-hover-text">
+                              Proceed to Checkout
+                            </span>
+                          )}
                         </button>
                       </div>
                     </aside>

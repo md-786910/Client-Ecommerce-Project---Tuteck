@@ -102,7 +102,7 @@ function Header() {
                     <div className="icon">
                       <i className="icon-shopping-cart"></i>
                       <span className="cart-count">
-                        {token && (data.data?.cart?.length || 0)}
+                        {data.data?.cart?.length || 0}
                       </span>
                     </div>
                     <p>Cart</p>

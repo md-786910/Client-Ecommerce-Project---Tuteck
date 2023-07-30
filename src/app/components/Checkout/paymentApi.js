@@ -42,7 +42,7 @@ export const paymentHandler = async (id) => {
         console.log("success111", status);
         if (status === 200) {
           // success the navigate to success page url - /checkout/confirm/:id
-          window.history.go(`/confirm?orderId=${id}`);
+          window.open(`/confirm?orderId=${id}`);
         }
       } catch (err) {
         console.log("error capture massage", err.message);

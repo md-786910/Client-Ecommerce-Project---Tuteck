@@ -250,7 +250,7 @@ function OrderProductListing() {
                           {data?.order?.status}
                         </button>
 
-                        {data?.order?.status === "PAID" ? (
+                        {data?.order?.status !== "PENDING" ? (
                           ""
                         ) : (
                           <button
