@@ -93,6 +93,7 @@ function AuthModel(props) {
         })
       );
 
+      setopen(false);
       setTimeout(() => {
         window.location.reload();
       }, 100);
@@ -102,6 +103,7 @@ function AuthModel(props) {
 
   useEffect(() => {
     if (isSuccess) {
+      setopen(false);
       userAlert("user registered successfully ");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
