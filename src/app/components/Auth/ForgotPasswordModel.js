@@ -31,10 +31,12 @@ function ForgotPasswordModel(props) {
   };
   if (isError) {
     showError(error?.data?.message, "Forgot password failed");
+    return;
   }
   if (isSuccess) {
     showSuccess("Your password has been send your emai Successfully");
     window.location.reload();
+    return;
   }
 
   return (
