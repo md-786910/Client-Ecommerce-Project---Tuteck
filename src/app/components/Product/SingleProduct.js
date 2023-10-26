@@ -46,7 +46,7 @@ function SingleProduct() {
 
   const addToCart = (prod) => {
     const { name, images, small_description, pricing } = prod;
-    const actPrice = pricing.split("$").filter(Boolean);
+    const actPrice = pricing?.split("$").filter(Boolean);
 
     const data = {
       productId,
@@ -54,7 +54,7 @@ function SingleProduct() {
       image: images[0],
       description: "",
       information: "",
-      price: parseInt(actPrice[0]),
+      price: parseInt(actPrice[0]) || 1200,
       qty: parseInt(qty),
     };
     creatingCart(data);
@@ -334,14 +334,14 @@ function SingleProduct() {
                   <hr className="my-1" />
 
                   <div className="ul">
-                    {data?.full_description.split("\n").map((item) => {
-                      return <li className="li mb-1">{item}</li>;
+                    {data?.full_description?.split("\n").map((item,index) => {
+                      return <li  key={index}className="li mb-1">{item}</li>;
                     })}
                   </div>
 
                   <div className="ul mt-3">
-                    {data?.small_description.split("-").map((item) => {
-                      return <li className="li mb-1">{item}</li>;
+                    {data?.small_description?.split("-").map((item,index) => {
+                      return <li key={index} className="li mb-1">{item}</li>;
                     })}
                   </div>
                 </div>
